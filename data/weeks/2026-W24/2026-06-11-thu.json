@@ -13,17 +13,22 @@
     "distance_km": 5.0,
     "pace_per_km": "4:48",
     "duration_minutes": 24,
-    "heart_rate_avg": null,
-    "heart_rate_max": null,
+    "heart_rate_avg": 180,
+    "heart_rate_max": 194,
     "elevation_m": 16,
     "shoes": null,
-    "strava_activity_id": null
+    "strava_activity_id": "18881531310"
   },
   "gym": null,
   "daily_comment": {
     "summary": "Strong tempo effort. 4:48/km for 5 km is a solid threshold session — flat profile with only 16m elevation kept the pace honest.",
-    "did_right": ["Maintained consistent pace throughout at genuine threshold effort", "Good distance for a tempo — not too long, not too short"],
-    "to_improve": ["Consider structured warm-up and cool-down around tempo blocks"],
+    "did_right": [
+      "Maintained consistent pace throughout at genuine threshold effort",
+      "Good distance for a tempo — not too long, not too short"
+    ],
+    "to_improve": [
+      "Consider structured warm-up and cool-down around tempo blocks"
+    ],
     "generated_at": "2026-06-12T08:00:00Z"
   }
 }

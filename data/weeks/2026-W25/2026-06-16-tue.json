@@ -1,0 +1,21 @@
+{
+  "date": "2026-06-16",
+  "day_of_week": "tuesday",
+  "week_id": "2026-W25",
+  "planned": null,
+  "completed": true,
+  "activity": {
+    "type": "run",
+    "run_type": "easy",
+    "distance_km": 5.0,
+    "pace_per_km": "6:41",
+    "duration_minutes": 34,
+    "heart_rate_avg": 154,
+    "heart_rate_max": 166,
+    "elevation_m": 30.2,
+    "shoes": "Nike Vomero Plus",
+    "strava_activity_id": "18942451658"
+  },
+  "gym": null,
+  "daily_comment": null
+}

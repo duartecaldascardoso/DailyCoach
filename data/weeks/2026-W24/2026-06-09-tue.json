@@ -13,17 +13,22 @@
     "distance_km": 6.0,
     "pace_per_km": "7:00",
     "duration_minutes": 42,
-    "heart_rate_avg": null,
-    "heart_rate_max": null,
+    "heart_rate_avg": 153,
+    "heart_rate_max": 165,
     "elevation_m": 23,
     "shoes": null,
-    "strava_activity_id": null
+    "strava_activity_id": "18854501547"
   },
   "gym": null,
   "daily_comment": {
     "summary": "Good easy run at conversational pace. 7:00/km is right in the Zone 2 sweet spot for aerobic development.",
-    "did_right": ["Pace stayed truly easy at 7:00/km", "Duration of 42 minutes gives decent aerobic stimulus"],
-    "to_improve": ["Consider adding strides at the end of easy runs to maintain leg speed"],
+    "did_right": [
+      "Pace stayed truly easy at 7:00/km",
+      "Duration of 42 minutes gives decent aerobic stimulus"
+    ],
+    "to_improve": [
+      "Consider adding strides at the end of easy runs to maintain leg speed"
+    ],
     "generated_at": "2026-06-10T08:00:00Z"
   }
 }

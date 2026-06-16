@@ -17,18 +17,25 @@
     "heart_rate_max": null,
     "elevation_m": null,
     "shoes": null,
-    "strava_activity_id": null
+    "strava_activity_id": "18894434634"
   },
   "gym": {
     "completed": true,
     "type": "chest+triceps",
     "duration_minutes": 25,
-    "notes": ""
+    "notes": "",
+    "strava_activity_id": "18893459548",
+    "heart_rate_max": 150
   },
   "daily_comment": {
     "summary": "Double session day — gym in the morning with chest and triceps (25 min), then beach volleyball in the evening (1h12). Good cross-training variety. The volleyball adds cardio and agility without running-specific load.",
-    "did_right": ["Good cross-training variety mixing gym and sport", "Beach volleyball adds cardio, agility and lateral movement patterns"],
-    "to_improve": ["Ensure adequate recovery before the weekend — two sessions in one day adds fatigue"],
+    "did_right": [
+      "Good cross-training variety mixing gym and sport",
+      "Beach volleyball adds cardio, agility and lateral movement patterns"
+    ],
+    "to_improve": [
+      "Ensure adequate recovery before the weekend — two sessions in one day adds fatigue"
+    ],
     "generated_at": "2026-06-13T08:00:00Z"
   }
 }

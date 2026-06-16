@@ -1,12 +1,22 @@
 {
-  "updated_at": "2026-06-16T07:00:00Z",
+  "updated_at": "2026-06-16T13:30:00Z",
   "week_summary": {
-    "total_distance_km": 0.0,
-    "total_runs": 0,
-    "total_elevation_m": 0,
-    "total_time_minutes": 0
+    "total_distance_km": 5.0,
+    "total_runs": 1,
+    "total_elevation_m": 30,
+    "total_time_minutes": 34
   },
   "recent_activities": [
+    {
+      "date": "2026-06-16",
+      "name": "Corrida da hora do almoço",
+      "distance_km": 5.0,
+      "pace_per_km": "6:41",
+      "duration_minutes": 34,
+      "elevation_m": 30,
+      "type": "easy",
+      "strava_activity_id": "18942451658"
+    },
     {
       "date": "2026-06-14",
       "name": "Corrida matinal",

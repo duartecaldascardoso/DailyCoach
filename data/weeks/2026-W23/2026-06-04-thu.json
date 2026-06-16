@@ -13,17 +13,22 @@
     "distance_km": 3.6,
     "pace_per_km": "6:27",
     "duration_minutes": 23,
-    "heart_rate_avg": null,
-    "heart_rate_max": null,
+    "heart_rate_avg": 163,
+    "heart_rate_max": 177,
     "elevation_m": 35,
     "shoes": null,
-    "strava_activity_id": null
+    "strava_activity_id": "18780859933"
   },
   "gym": null,
   "daily_comment": {
     "summary": "Easy run with Brownie. 3.6 km at 6:27/km is a comfortable effort. Good way to ease back into running.",
-    "did_right": ["Kept it easy on the return to running", "35m elevation adds some variety"],
-    "to_improve": ["Could extend to 5 km as fitness builds"],
+    "did_right": [
+      "Kept it easy on the return to running",
+      "35m elevation adds some variety"
+    ],
+    "to_improve": [
+      "Could extend to 5 km as fitness builds"
+    ],
     "generated_at": "2026-06-05T08:00:00Z"
   }
 }

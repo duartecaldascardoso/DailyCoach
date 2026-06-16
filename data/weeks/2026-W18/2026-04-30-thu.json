@@ -1,0 +1,21 @@
+{
+  "date": "2026-04-30",
+  "day_of_week": "thursday",
+  "week_id": "2026-W18",
+  "planned": null,
+  "completed": true,
+  "activity": {
+    "type": "run",
+    "run_type": "recovery",
+    "distance_km": 0.5,
+    "pace_per_km": "8:59",
+    "duration_minutes": 5,
+    "heart_rate_avg": null,
+    "heart_rate_max": null,
+    "elevation_m": null,
+    "shoes": null,
+    "strava_activity_id": "18323607518"
+  },
+  "gym": null,
+  "daily_comment": null
+}
