@@ -1,7 +1,7 @@
-# Daily Training Routine — Every day at 8am
+# Daily Training Routine — Every day at 9pm
 
 Paste this as the prompt when creating your Claude routine at claude.ai/code/routines.
-Set the trigger to **daily at 08:00 (local time)**. Include the **Strava** and **Google Calendar** connectors.
+Set the trigger to **daily at 21:00 (local time)**. Include the **Strava** and **Google Calendar** connectors.
 
 ---
 
@@ -15,31 +15,33 @@ Set the trigger to **daily at 08:00 (local time)**. Include the **Strava** and *
 
 ---
 
-## Step 1 — Determine yesterday and the current week
+## Step 1 — Determine today and the current week
 
-Calculate yesterday's date and its ISO week ID.
+Calculate today's date and its ISO week ID.
 Read `data/manifest.json` to find the current week folder.
 Read `data/weeks/{week-id}/week.json` to get the plan.
 
-Find yesterday's planned session from the `plan.sessions` array (match by day name: monday, tuesday, etc.).
+Find today's planned session from the `plan.sessions` array (match by day name: monday, tuesday, etc.).
 
 ---
 
-## Step 2 — Fetch Strava data for yesterday
+## Step 2 — Fetch Strava data for today
 
-Use the Strava connector to check for activities on yesterday's date.
+Use the Strava connector to check for **all activities** on today's date — not just runs.
+This includes: running, cycling, swimming, volleyball, walking, weight training, and any other sport.
 
-If a run was recorded, extract:
-- `distance_km` (1 decimal)
-- `pace_per_km` (format M:SS)
-- `duration_minutes` (integer)
+For each activity found, extract what is available:
+- `type` — the sport type (e.g. "run", "volleyball", "cycling", "swimming", "walking")
+- `distance_km` (1 decimal, if applicable — null for sports like volleyball)
+- `pace_per_km` (format M:SS, only for running)
+- `duration_minutes` (integer — always available)
 - `heart_rate_avg` (integer, if available from HR monitor)
 - `heart_rate_max` (integer, if available)
-- `elevation_m` (integer)
-- `shoes` (from Strava gear data, e.g. "Nike Pegasus 41")
+- `elevation_m` (integer, if applicable)
+- `shoes` (from Strava gear data, only for running)
 - `strava_activity_id`
 
-Classify the run type as one of: `easy` | `tempo` | `long` | `interval` | `race` | `recovery`
+If the activity is a **run**, also classify the run type as one of: `easy` | `tempo` | `long` | `interval` | `race` | `recovery`
 - **long**: ≥14 km
 - **interval**: short with fast segments, or matches "interval/VO2max" in plan
 - **tempo**: sustained effort near threshold (pace ≤5:30/km for 4+ km)
@@ -47,16 +49,20 @@ Classify the run type as one of: `easy` | `tempo` | `long` | `interval` | `race`
 - **recovery**: very short and slow (≤4 km at ≥6:30/km)
 - **race**: matches "race" in plan or event name
 
+For **non-run activities**, set `run_type` to `null` and leave run-specific fields (`distance_km`, `pace_per_km`, `elevation_m`, `shoes`) as `null`.
+
+If **multiple activities** exist on the same day (e.g. gym + volleyball), use the sport activity for the `activity` field and the gym/weight-training for the `gym` field.
+
 ---
 
 ## Step 3 — Check Google Calendar
 
-Use the Google Calendar connector to check yesterday's training event.
+Use the Google Calendar connector to check today's training event.
 Note whether it existed and what it was.
 
 ---
 
-## Step 4 — Create yesterday's day JSON
+## Step 4 — Create today's day JSON
 
 Write `data/weeks/{week-id}/{YYYY-MM-DD-day}.json` where `day` is the three-letter lowercase day name (mon, tue, wed, thu, fri, sat, sun).
 
@@ -86,6 +92,7 @@ Write `data/weeks/{week-id}/{YYYY-MM-DD-day}.json` where `day` is the three-lett
   "gym": {
     "completed": true,
     "type": "legs|chest+triceps|back+biceps|shoulders+abs",
+    "duration_minutes": 30,
     "notes": ""
   },
   "daily_comment": {
@@ -114,7 +121,7 @@ Write `data/weeks/{week-id}/{YYYY-MM-DD-day}.json` where `day` is the three-lett
 
 ## Step 5 — Generate the daily comment
 
-Analyze yesterday's training. The comment should be:
+Analyze today's training. The comment should be:
 - **Specific and data-driven** — reference actual pace, distance, HR numbers
 - **Compared to plan** — did they do what was planned?
 - **Contextual** — consider the training phase, race dates, and recent load
@@ -141,7 +148,7 @@ Example: `Treino: Easy run Zone 2 ✅` or `Treino: VO2max intervals ❌`
 
 ## Step 7 — Update the manifest
 
-Read `data/manifest.json`. Add yesterday's day file to the current week's `days` array.
+Read `data/manifest.json`. Add today's day file to the current week's `days` array.
 Update `updated_at`.
 
 Write the updated `data/manifest.json`.

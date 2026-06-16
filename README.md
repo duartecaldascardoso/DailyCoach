@@ -14,8 +14,8 @@ Two Claude routines run on a schedule and push data to this repo. GitHub Pages s
 - Creates Google Calendar events for each planned session
 - Writes `week.json` with the plan and review
 
-**Daily routine** — runs every day at 8am:
-- Checks yesterday's Strava data for completed runs
+**Daily routine** — runs every day at 9pm:
+- Checks today's Strava data for all activities (runs, gym, volleyball, etc.)
 - Cross-references with what was planned in Google Calendar
 - Creates a day JSON with all metrics (distance, pace, HR, elevation, shoes)
 - Generates a coaching comment on what went right and what to improve
@@ -60,8 +60,8 @@ No framework, no dependencies beyond Chart.js (loaded via CDN). Works on mobile.
 1. Fork this repo and enable GitHub Pages
 2. Connect your Strava and Google Calendar to Claude
 3. Create two routines at [claude.ai](https://claude.ai):
-   - **Weekly**: paste [`WEEKLY_ROUTINE.md`](WEEKLY_ROUTINE.md), trigger Sunday 18:00
-   - **Daily**: paste [`DAILY_ROUTINE.md`](DAILY_ROUTINE.md), trigger daily 08:00
+   - **Weekly**: paste [`WEEKLY_ROUTINE.md`](routine/WEEKLY_ROUTINE.md), trigger Sunday 18:00
+   - **Daily**: paste [`DAILY_ROUTINE.md`](routine/DAILY_ROUTINE.md), trigger daily 21:00
 4. The routines commit and push data — the dashboard updates automatically
 
 ## Goals

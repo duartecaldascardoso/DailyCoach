@@ -159,7 +159,7 @@
 
     .chart-box {
       position: relative;
-      height: 140px;
+      height: 170px;
     }
 
     /* ── Activity rows ── */
@@ -607,7 +607,7 @@
       }));
       const bestStr = bestP < Infinity ? `${Math.floor(bestP/60)}:${String(bestP%60).padStart(2,'0')}` : '—';
 
-      const recent = allDays.filter(d => d.activity).sort((a,b) => b.date.localeCompare(a.date)).slice(0,6);
+      const recent = allDays.filter(d => d.activity || d.gym?.completed).sort((a,b) => b.date.localeCompare(a.date)).slice(0,6);
 
       el.innerHTML = `
         <div class="view">
@@ -680,19 +680,24 @@
           <div class="section">
             <div class="label">Recent</div>
             ${recent.length === 0 ? '<div class="empty">No activities yet</div>' :
-              recent.map(d => `
+              recent.map(d => {
+                const act = d.activity;
+                const gym = d.gym;
+                const isRun = act?.type === 'run';
+                const label = isRun ? (act.run_type || 'run') : (act?.type || (gym ? 'gym · ' + (gym.type || 'session') : '—'));
+                const dur = act?.duration_minutes || gym?.duration_minutes || 0;
+                return `
                 <div class="act-row">
                   <div class="act-date">${fmtShort(d.date)}</div>
                   <div>
-                    <div class="act-name">${d.activity.run_type || 'run'}</div>
-                    <div class="act-type">${d.activity.run_type || ''}</div>
+                    <div class="act-name">${label}</div>
+                    <div class="act-type">${isRun ? act.run_type : (act?.type || 'gym')}</div>
                   </div>
                   <div class="act-nums">
-                    <div class="act-dist">${d.activity.distance_km} km</div>
-                    <div class="act-pace">${d.activity.pace_per_km}/km · ${d.activity.duration_minutes}'</div>
+                    ${isRun ? `<div class="act-dist">${act.distance_km} km</div><div class="act-pace">${act.pace_per_km}/km · ${dur}'</div>` : `<div class="act-dist">${dur}'</div><div class="act-pace">duration</div>`}
                   </div>
-                </div>
-              `).join('')}
+                </div>`;
+              }).join('')}
           </div>
 
           <hr class="divider">
@@ -725,15 +730,18 @@
 
     /* ══════════ CHARTS ══════════ */
     function buildCharts(weeks) {
-      const labels = weeks.map(w => w.week_id.replace('2026-',''));
-      const kmD = weeks.map(w => w.wd?.review?.total_km ?? w.ds.reduce((s,d) => s+(d.activity?.distance_km||0), 0));
-      const runsD = weeks.map(w => w.wd?.review?.total_runs ?? w.ds.filter(d => d.activity?.type==='run').length);
-      const compD = weeks.map(w => {
+      // Only chart weeks that have actual data
+      const charted = weeks.filter(w => w.ds.length > 0 || w.wd?.review);
+      const labels = charted.map(w => w.week_id.replace('2026-',''));
+      const kmD = charted.map(w => w.wd?.review?.total_km ?? w.ds.reduce((s,d) => s+(d.activity?.distance_km||0), 0));
+      const runsD = charted.map(w => w.wd?.review?.total_runs ?? w.ds.filter(d => d.activity?.type==='run').length);
+      const compD = charted.map(w => {
         if (w.wd?.review?.completion_rate != null) return Math.round(w.wd.review.completion_rate*100);
-        if (!w.wd?.plan?.sessions?.length) return 0;
-        return Math.round(w.ds.filter(d => d.completed).length / w.wd.plan.sessions.length * 100);
+        if (!w.wd?.plan?.sessions?.length) return null;
+        const done = w.ds.filter(d => d.completed).length;
+        return Math.round(done / w.wd.plan.sessions.length * 100);
       });
-      const paceD = weeks.map(w => {
+      const paceD = charted.map(w => {
         const rs = w.ds.filter(d => d.activity?.pace_per_km);
         if (!rs.length) return null;
         return rs.reduce((s,d) => { const [m,sec] = d.activity.pace_per_km.split(':').map(Number); return s+m*60+sec; }, 0) / rs.length / 60;
@@ -741,12 +749,13 @@
 
       const base = {
         responsive: true, maintainAspectRatio: false,
+        layout: { padding: { left: 4, right: 8, top: 8, bottom: 4 } },
         plugins: { legend: { display: false },
           tooltip: { backgroundColor:'#1A1A1A', titleFont:{family:"'Inter'",size:11}, bodyFont:{family:'ui-monospace',size:11}, cornerRadius:4, padding:8, borderColor:'#E5E2DB', borderWidth:1, titleColor:'#fff', bodyColor:'#ccc' }
         },
         scales: {
           x: { grid:{display:false}, ticks:{color:'#A39E96',font:{size:9,family:'ui-monospace'}}, border:{display:false} },
-          y: { grid:{color:'#E5E2DB',lineWidth:0.5}, ticks:{color:'#A39E96',font:{size:9,family:'ui-monospace'}}, border:{display:false}, beginAtZero:true }
+          y: { grid:{color:'#E5E2DB',lineWidth:0.5}, ticks:{color:'#A39E96',font:{size:9,family:'ui-monospace'}, maxTicksLimit:6}, border:{display:false}, beginAtZero:true }
         }
       };
 
@@ -758,7 +767,7 @@
       if (e('c-km')) charts.km = new Chart(e('c-km'), { type:'bar', data:{ labels, datasets:[{ data:kmD, ...barStyle }] }, options:{...base, plugins:{...base.plugins, tooltip:{...base.plugins.tooltip, callbacks:{label:c=>c.raw.toFixed(1)+' km'}}}} });
       if (e('c-runs')) charts.runs = new Chart(e('c-runs'), { type:'bar', data:{ labels, datasets:[{ data:runsD, ...barStyle }] }, options:{...base, scales:{...base.scales, y:{...base.scales.y, ticks:{...base.scales.y.ticks,stepSize:1}}}, plugins:{...base.plugins, tooltip:{...base.plugins.tooltip, callbacks:{label:c=>c.raw+' runs'}}}} });
       if (e('c-comp')) charts.comp = new Chart(e('c-comp'), { type:'line', data:{ labels, datasets:[{ data:compD, ...lineStyle }] }, options:{...base, scales:{...base.scales, y:{...base.scales.y, max:100, ticks:{...base.scales.y.ticks, callback:v=>v+'%'}}}, plugins:{...base.plugins, tooltip:{...base.plugins.tooltip, callbacks:{label:c=>c.raw+'%'}}}} });
-      if (e('c-pace')) charts.pace = new Chart(e('c-pace'), { type:'line', data:{ labels, datasets:[{ data:paceD, ...lineStyle, spanGaps:true }] }, options:{...base, scales:{...base.scales, y:{...base.scales.y, reverse:true, beginAtZero:false, ticks:{...base.scales.y.ticks, callback:v=>{const m=Math.floor(v),s=Math.round((v-m)*60);return m+':'+String(s).padStart(2,'0');}}}}, plugins:{...base.plugins, tooltip:{...base.plugins.tooltip, callbacks:{label:c=>{if(c.raw==null)return'—';const m=Math.floor(c.raw),s=Math.round((c.raw-m)*60);return m+':'+String(s).padStart(2,'0')+'/km';}}}}} });
+      if (e('c-pace')) charts.pace = new Chart(e('c-pace'), { type:'line', data:{ labels, datasets:[{ data:paceD, ...lineStyle, spanGaps:true }] }, options:{...base, scales:{...base.scales, y:{...base.scales.y, reverse:true, beginAtZero:false, ticks:{...base.scales.y.ticks, maxTicksLimit:5, callback:v=>{const m=Math.floor(v),s=Math.round((v-m)*60);return m+':'+String(s).padStart(2,'0');}}}}, plugins:{...base.plugins, tooltip:{...base.plugins.tooltip, callbacks:{label:c=>{if(c.raw==null)return'—';const m=Math.floor(c.raw),s=Math.round((c.raw-m)*60);return m+':'+String(s).padStart(2,'0')+'/km';}}}}} });
     }
 
     /* ══════════ WEEKLY VIEW ══════════ */
@@ -871,13 +880,13 @@
               <div class="day-plan-text">${ps?.description || dd?.planned?.description || '—'}</div>
             </div>
             <div class="day-right">
-              ${act ? `<span class="day-km">${act.distance_km} km</span>` : ''}
+              ${act && act.type === 'run' ? `<span class="day-km">${act.distance_km} km</span>` : act ? `<span class="day-km">${act.duration_minutes}'</span>` : gym ? `<span class="day-km">${gym.duration_minutes || ''}'</span>` : ''}
               <span class="day-status ${sClass}">${icon}</span>
             </div>
           </div>
           ${has ? `
             <div class="day-body">
-              ${act ? `
+              ${act && act.type === 'run' ? `
                 <div class="day-metrics">
                   <div class="dm"><div class="dm-val">${act.distance_km}</div><div class="dm-lbl">km</div></div>
                   <div class="dm"><div class="dm-val">${act.pace_per_km}</div><div class="dm-lbl">pace</div></div>
@@ -886,8 +895,18 @@
                   ${act.elevation_m ? `<div class="dm"><div class="dm-val">${act.elevation_m}m</div><div class="dm-lbl">elev</div></div>` : ''}
                 </div>
                 <div class="act-type">${act.run_type || 'run'}${act.shoes ? ' · ' + act.shoes : ''}</div>
+              ` : act ? `
+                <div class="day-metrics">
+                  <div class="dm"><div class="dm-val">${act.duration_minutes}'</div><div class="dm-lbl">duration</div></div>
+                </div>
+                <div class="act-type">${act.type}</div>
               ` : ''}
-              ${gym ? `<div class="act-type" style="margin-top:4px">gym · ${gym.type || 'session'}${gym.completed ? ' ✓' : ''}</div>` : ''}
+              ${gym ? `
+                <div class="day-metrics" style="margin-top:${act ? '12px' : '0'}">
+                  <div class="dm"><div class="dm-val">${gym.duration_minutes || '—'}'</div><div class="dm-lbl">duration</div></div>
+                </div>
+                <div class="act-type">gym · ${gym.type || 'session'}${gym.completed ? ' ✓' : ''}</div>
+              ` : ''}
               ${cm ? `
                 <div class="day-comment-block">
                   <div class="day-comment-text">${cm.summary}</div>

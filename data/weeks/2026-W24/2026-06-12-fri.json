@@ -1,0 +1,34 @@
+{
+  "date": "2026-06-12",
+  "day_of_week": "friday",
+  "week_id": "2026-W24",
+  "planned": {
+    "type": "gym+other",
+    "description": "Gym (Chest + Triceps) + Beach Volleyball"
+  },
+  "completed": true,
+  "activity": {
+    "type": "volleyball",
+    "run_type": null,
+    "distance_km": null,
+    "pace_per_km": null,
+    "duration_minutes": 72,
+    "heart_rate_avg": null,
+    "heart_rate_max": null,
+    "elevation_m": null,
+    "shoes": null,
+    "strava_activity_id": null
+  },
+  "gym": {
+    "completed": true,
+    "type": "chest+triceps",
+    "duration_minutes": 25,
+    "notes": ""
+  },
+  "daily_comment": {
+    "summary": "Double session day — gym in the morning with chest and triceps (25 min), then beach volleyball in the evening (1h12). Good cross-training variety. The volleyball adds cardio and agility without running-specific load.",
+    "did_right": ["Good cross-training variety mixing gym and sport", "Beach volleyball adds cardio, agility and lateral movement patterns"],
+    "to_improve": ["Ensure adequate recovery before the weekend — two sessions in one day adds fatigue"],
+    "generated_at": "2026-06-13T08:00:00Z"
+  }
+}

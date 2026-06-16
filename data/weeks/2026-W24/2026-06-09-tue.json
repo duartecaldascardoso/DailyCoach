@@ -1,6 +1,6 @@
 {
   "date": "2026-06-09",
-  "day_of_week": "monday",
+  "day_of_week": "tuesday",
   "week_id": "2026-W24",
   "planned": {
     "type": "run",
@@ -21,14 +21,9 @@
   },
   "gym": null,
   "daily_comment": {
-    "summary": "Good easy run at conversational pace. 7:00/km is right in the Zone 2 sweet spot for aerobic development. Elevation was modest at 23m. Solid recovery day execution.",
-    "did_right": [
-      "Pace stayed truly easy at 7:00/km — no temptation to speed up",
-      "Duration of 42 minutes gives decent aerobic stimulus"
-    ],
-    "to_improve": [
-      "Consider adding strides at the end of easy runs to maintain leg speed"
-    ],
+    "summary": "Good easy run at conversational pace. 7:00/km is right in the Zone 2 sweet spot for aerobic development.",
+    "did_right": ["Pace stayed truly easy at 7:00/km", "Duration of 42 minutes gives decent aerobic stimulus"],
+    "to_improve": ["Consider adding strides at the end of easy runs to maintain leg speed"],
     "generated_at": "2026-06-10T08:00:00Z"
   }
 }

@@ -1,6 +1,6 @@
 {
   "date": "2026-06-08",
-  "day_of_week": "sunday",
+  "day_of_week": "monday",
   "week_id": "2026-W24",
   "planned": {
     "type": "run",
@@ -21,7 +21,7 @@
   },
   "gym": null,
   "daily_comment": {
-    "summary": "Easy run with Brownie. 6:52/km is good easy pace. The 27m elevation adds some variety. Nice way to cap the first week of runs.",
+    "summary": "Easy run with Brownie. 6:52/km is good easy pace. The 27m elevation adds some variety.",
     "did_right": ["Good easy pace at 6:52/km", "Running with the dog keeps it conversational"],
     "to_improve": ["Could extend dog runs to 5 km as they become routine"],
     "generated_at": "2026-06-09T08:00:00Z"

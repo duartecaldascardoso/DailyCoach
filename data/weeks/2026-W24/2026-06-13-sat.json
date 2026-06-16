@@ -1,0 +1,23 @@
+{
+  "date": "2026-06-13",
+  "day_of_week": "saturday",
+  "week_id": "2026-W24",
+  "planned": {
+    "type": "gym",
+    "description": "Gym (Shoulders + Abs)"
+  },
+  "completed": true,
+  "activity": null,
+  "gym": {
+    "completed": true,
+    "type": "shoulders+abs",
+    "duration_minutes": 40,
+    "notes": ""
+  },
+  "daily_comment": {
+    "summary": "Gym-only day — shoulders and abs, 40 minutes. Good pre-long-run day keeping legs fresh while still training upper body.",
+    "did_right": ["Smart session choice — upper body work keeps legs fresh for tomorrow's long run", "40 minutes is a solid gym session"],
+    "to_improve": ["Consider adding some core stability work specifically for running posture"],
+    "generated_at": "2026-06-14T08:00:00Z"
+  }
+}
