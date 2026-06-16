@@ -749,13 +749,13 @@
 
       const base = {
         responsive: true, maintainAspectRatio: false,
-        layout: { padding: { left: 4, right: 8, top: 8, bottom: 4 } },
+        layout: { padding: { left: 4, right: 8, top: 20, bottom: 4 } },
         plugins: { legend: { display: false },
           tooltip: { backgroundColor:'#1A1A1A', titleFont:{family:"'Inter'",size:11}, bodyFont:{family:'ui-monospace',size:11}, cornerRadius:4, padding:8, borderColor:'#E5E2DB', borderWidth:1, titleColor:'#fff', bodyColor:'#ccc' }
         },
         scales: {
           x: { grid:{display:false}, ticks:{color:'#A39E96',font:{size:9,family:'ui-monospace'}}, border:{display:false} },
-          y: { grid:{color:'#E5E2DB',lineWidth:0.5}, ticks:{color:'#A39E96',font:{size:9,family:'ui-monospace'}, maxTicksLimit:6}, border:{display:false}, beginAtZero:true }
+          y: { grid:{color:'#E5E2DB',lineWidth:0.5}, ticks:{color:'#A39E96',font:{size:9,family:'ui-monospace'}, maxTicksLimit:6}, border:{display:false}, beginAtZero:true, grace:'15%' }
         }
       };
 
@@ -766,7 +766,7 @@
 
       if (e('c-km')) charts.km = new Chart(e('c-km'), { type:'bar', data:{ labels, datasets:[{ data:kmD, ...barStyle }] }, options:{...base, plugins:{...base.plugins, tooltip:{...base.plugins.tooltip, callbacks:{label:c=>c.raw.toFixed(1)+' km'}}}} });
       if (e('c-runs')) charts.runs = new Chart(e('c-runs'), { type:'bar', data:{ labels, datasets:[{ data:runsD, ...barStyle }] }, options:{...base, scales:{...base.scales, y:{...base.scales.y, ticks:{...base.scales.y.ticks,stepSize:1}}}, plugins:{...base.plugins, tooltip:{...base.plugins.tooltip, callbacks:{label:c=>c.raw+' runs'}}}} });
-      if (e('c-comp')) charts.comp = new Chart(e('c-comp'), { type:'line', data:{ labels, datasets:[{ data:compD, ...lineStyle }] }, options:{...base, scales:{...base.scales, y:{...base.scales.y, max:100, ticks:{...base.scales.y.ticks, callback:v=>v+'%'}}}, plugins:{...base.plugins, tooltip:{...base.plugins.tooltip, callbacks:{label:c=>c.raw+'%'}}}} });
+      if (e('c-comp')) charts.comp = new Chart(e('c-comp'), { type:'line', data:{ labels, datasets:[{ data:compD, ...lineStyle }] }, options:{...base, scales:{...base.scales, y:{...base.scales.y, max:108, grace:0, ticks:{...base.scales.y.ticks, callback:v=>v<=100?v+'%':''}}}, plugins:{...base.plugins, tooltip:{...base.plugins.tooltip, callbacks:{label:c=>c.raw+'%'}}}} });
       if (e('c-pace')) charts.pace = new Chart(e('c-pace'), { type:'line', data:{ labels, datasets:[{ data:paceD, ...lineStyle, spanGaps:true }] }, options:{...base, scales:{...base.scales, y:{...base.scales.y, reverse:true, beginAtZero:false, ticks:{...base.scales.y.ticks, maxTicksLimit:5, callback:v=>{const m=Math.floor(v),s=Math.round((v-m)*60);return m+':'+String(s).padStart(2,'0');}}}}, plugins:{...base.plugins, tooltip:{...base.plugins.tooltip, callbacks:{label:c=>{if(c.raw==null)return'—';const m=Math.floor(c.raw),s=Math.round((c.raw-m)*60);return m+':'+String(s).padStart(2,'0')+'/km';}}}}} });
     }
 
