@@ -2,7 +2,7 @@
 
 A minimal, automated training dashboard for marathon preparation. Built as a static GitHub Pages site that gets updated daily by [Claude](https://claude.ai) routines — no backend, no database.
 
-![Dashboard](showcase.png)
+![Dashboard](docs/showcase.png)
 
 ## How it works
 
