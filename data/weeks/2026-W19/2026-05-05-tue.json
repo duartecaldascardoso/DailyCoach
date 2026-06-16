@@ -1,0 +1,21 @@
+{
+  "date": "2026-05-05",
+  "day_of_week": "tuesday",
+  "week_id": "2026-W19",
+  "planned": null,
+  "completed": true,
+  "activity": {
+    "type": "run",
+    "run_type": "tempo",
+    "distance_km": 0.5,
+    "pace_per_km": "4:37",
+    "duration_minutes": 16,
+    "heart_rate_avg": null,
+    "heart_rate_max": null,
+    "elevation_m": null,
+    "shoes": null,
+    "strava_activity_id": "18386109950"
+  },
+  "gym": null,
+  "daily_comment": null
+}

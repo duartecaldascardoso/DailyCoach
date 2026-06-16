@@ -13,17 +13,24 @@
     "distance_km": 17.6,
     "pace_per_km": "6:17",
     "duration_minutes": 111,
-    "heart_rate_avg": null,
-    "heart_rate_max": null,
+    "heart_rate_avg": 167,
+    "heart_rate_max": 182,
     "elevation_m": 106,
-    "shoes": null,
-    "strava_activity_id": null
+    "shoes": "Nike Vomero Plus",
+    "strava_activity_id": "18916147714"
   },
   "gym": null,
   "daily_comment": {
     "summary": "Excellent long run. 17.6 km at 6:17/km is a strong aerobic stimulus with 106m of elevation adding neuromuscular load. This is the cornerstone session of the week.",
-    "did_right": ["17.6 km is the longest run in the last 14 days — good progressive overload", "6:17/km pace is appropriate for a long run with elevation", "Completed the full distance without bonking"],
-    "to_improve": ["Target 19-21 km over the next Sundays for half-marathon readiness", "Consider fueling strategy for runs over 90 minutes"],
+    "did_right": [
+      "17.6 km is the longest run in the last 14 days — good progressive overload",
+      "6:17/km pace is appropriate for a long run with elevation",
+      "Completed the full distance without bonking"
+    ],
+    "to_improve": [
+      "Target 19-21 km over the next Sundays for half-marathon readiness",
+      "Consider fueling strategy for runs over 90 minutes"
+    ],
     "generated_at": "2026-06-15T08:00:00Z"
   }
 }

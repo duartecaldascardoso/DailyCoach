@@ -1,0 +1,21 @@
+{
+  "date": "2026-05-24",
+  "day_of_week": "sunday",
+  "week_id": "2026-W21",
+  "planned": null,
+  "completed": true,
+  "activity": {
+    "type": "surf",
+    "run_type": null,
+    "distance_km": 1.2,
+    "pace_per_km": null,
+    "duration_minutes": 47,
+    "heart_rate_avg": null,
+    "heart_rate_max": null,
+    "elevation_m": null,
+    "shoes": null,
+    "strava_activity_id": "18633862759"
+  },
+  "gym": null,
+  "daily_comment": null
+}
