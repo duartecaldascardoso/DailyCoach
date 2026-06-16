@@ -1,0 +1,29 @@
+{
+  "date": "2026-06-04",
+  "day_of_week": "thursday",
+  "week_id": "2026-W23",
+  "planned": {
+    "type": "run",
+    "description": "Tempo run, 4 km"
+  },
+  "completed": true,
+  "activity": {
+    "type": "run",
+    "run_type": "easy",
+    "distance_km": 3.6,
+    "pace_per_km": "6:27",
+    "duration_minutes": 23,
+    "heart_rate_avg": null,
+    "heart_rate_max": null,
+    "elevation_m": 35,
+    "shoes": null,
+    "strava_activity_id": null
+  },
+  "gym": null,
+  "daily_comment": {
+    "summary": "Easy run with Brownie. 3.6 km at 6:27/km is a comfortable effort. Good way to ease back into running.",
+    "did_right": ["Kept it easy on the return to running", "35m elevation adds some variety"],
+    "to_improve": ["Could extend to 5 km as fitness builds"],
+    "generated_at": "2026-06-05T08:00:00Z"
+  }
+}

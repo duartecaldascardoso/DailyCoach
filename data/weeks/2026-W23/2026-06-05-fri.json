@@ -1,0 +1,29 @@
+{
+  "date": "2026-06-05",
+  "day_of_week": "friday",
+  "week_id": "2026-W23",
+  "planned": {
+    "type": "run",
+    "description": "Tempo run, 4 km"
+  },
+  "completed": true,
+  "activity": {
+    "type": "run",
+    "run_type": "tempo",
+    "distance_km": 4.0,
+    "pace_per_km": "5:09",
+    "duration_minutes": 21,
+    "heart_rate_avg": null,
+    "heart_rate_max": null,
+    "elevation_m": 30,
+    "shoes": null,
+    "strava_activity_id": null
+  },
+  "gym": null,
+  "daily_comment": {
+    "summary": "Strong tempo effort for a return-to-running week. 5:09/km for 4 km shows good underlying fitness. The 30m elevation makes this even more impressive.",
+    "did_right": ["Maintained consistent tempo pace", "Good distance for a quality session early in the return"],
+    "to_improve": ["Ensure adequate recovery before tomorrow's run"],
+    "generated_at": "2026-06-06T08:00:00Z"
+  }
+}

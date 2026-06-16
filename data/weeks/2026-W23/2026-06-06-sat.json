@@ -1,0 +1,29 @@
+{
+  "date": "2026-06-06",
+  "day_of_week": "saturday",
+  "week_id": "2026-W23",
+  "planned": {
+    "type": "run",
+    "description": "Easy recovery run, 3 km"
+  },
+  "completed": true,
+  "activity": {
+    "type": "run",
+    "run_type": "recovery",
+    "distance_km": 3.0,
+    "pace_per_km": "7:41",
+    "duration_minutes": 23,
+    "heart_rate_avg": null,
+    "heart_rate_max": null,
+    "elevation_m": 9,
+    "shoes": null,
+    "strava_activity_id": null
+  },
+  "gym": null,
+  "daily_comment": {
+    "summary": "First proper run back. 7:41/km is a true recovery pace — exactly right. Flat profile with only 9m elevation. Good discipline keeping it slow.",
+    "did_right": ["True recovery pace — didn't push", "Good to get the legs moving after the break"],
+    "to_improve": ["Nothing — this was executed perfectly for day one back"],
+    "generated_at": "2026-06-07T08:00:00Z"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "week_id": "2026-W24",
+  "start_date": "2026-06-09",
+  "end_date": "2026-06-15",
+  "plan": {
+    "summary": "Base-building week focusing on aerobic volume. One quality tempo session, progressive long run on Sunday, easy runs to fill volume.",
+    "sessions": [
+      { "day": "monday", "type": "run", "description": "Easy run Zone 2, 6 km" },
+      { "day": "wednesday", "type": "run", "description": "Tempo run, 5 km at threshold pace" },
+      { "day": "thursday", "type": "gym", "description": "Gym — Upper body (Chest + Triceps)" },
+      { "day": "friday", "type": "gym", "description": "Gym — Legs + Core" },
+      { "day": "saturday", "type": "run", "description": "Easy run with Brownie, 3-4 km" },
+      { "day": "sunday", "type": "run", "description": "Long run, 17-18 km easy pace" }
+    ]
+  },
+  "review": {
+    "summary": "The week of June 8–14 closed with 32.0 km across 4 runs, anchored by a strong 17.6 km long run at 6:17/km with 106m elevation on Sunday. Solid tempo effort mid-week at 4:48/km for 5 km. Easy volume outside the long run was light (6.0 km + 3.4 km) — adding one more easy run would boost aerobic stimulus.",
+    "completion_rate": 0.67,
+    "total_km": 32.0,
+    "total_runs": 4,
+    "total_gym_sessions": 0,
+    "total_time_minutes": 220,
+    "avg_pace": "6:16",
+    "highlights": [
+      "17.6 km long run with 106m elevation — strongest aerobic stimulus in 14 days",
+      "5.0 km tempo at 4:48/km shows solid speed development"
+    ],
+    "areas_to_improve": [
+      "Easy run volume too low outside long run — add one 8-10 km easy day",
+      "No gym sessions logged — need to integrate strength work",
+      "Replace ad-hoc fast efforts with structured intervals"
+    ]
+  },
+  "created_at": "2026-06-08T18:00:00Z",
+  "reviewed_at": "2026-06-15T18:00:00Z"
+}

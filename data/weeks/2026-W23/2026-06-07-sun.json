@@ -1,0 +1,29 @@
+{
+  "date": "2026-06-07",
+  "day_of_week": "sunday",
+  "week_id": "2026-W23",
+  "planned": {
+    "type": "run",
+    "description": "Easy run, 3-4 km"
+  },
+  "completed": true,
+  "activity": {
+    "type": "run",
+    "run_type": "easy",
+    "distance_km": 3.3,
+    "pace_per_km": "6:19",
+    "duration_minutes": 21,
+    "heart_rate_avg": null,
+    "heart_rate_max": null,
+    "elevation_m": 8,
+    "shoes": null,
+    "strava_activity_id": null
+  },
+  "gym": null,
+  "daily_comment": {
+    "summary": "Easy run. 6:19/km for 3.3 km — a bit fast for an easy day but manageable. Flat route.",
+    "did_right": ["Kept the run short and manageable", "Good consistency — 4th day in a row"],
+    "to_improve": ["6:19 is borderline — aim for 6:30+ on easy days"],
+    "generated_at": "2026-06-08T08:00:00Z"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "date": "2026-06-08",
+  "day_of_week": "sunday",
+  "week_id": "2026-W24",
+  "planned": {
+    "type": "run",
+    "description": "Easy run with Brownie, 3-4 km"
+  },
+  "completed": true,
+  "activity": {
+    "type": "run",
+    "run_type": "easy",
+    "distance_km": 3.4,
+    "pace_per_km": "6:52",
+    "duration_minutes": 23,
+    "heart_rate_avg": null,
+    "heart_rate_max": null,
+    "elevation_m": 27,
+    "shoes": null,
+    "strava_activity_id": null
+  },
+  "gym": null,
+  "daily_comment": {
+    "summary": "Easy run with Brownie. 6:52/km is good easy pace. The 27m elevation adds some variety. Nice way to cap the first week of runs.",
+    "did_right": ["Good easy pace at 6:52/km", "Running with the dog keeps it conversational"],
+    "to_improve": ["Could extend dog runs to 5 km as they become routine"],
+    "generated_at": "2026-06-09T08:00:00Z"
+  }
+}

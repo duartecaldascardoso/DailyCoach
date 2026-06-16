@@ -3,21 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Duarte's marathon training log">
-  <meta name="theme-color" content="#F9F8F6">
+  <meta name="description" content="Duarte's marathon training dashboard — track runs, gym sessions, and weekly progress towards Porto Half Marathon and Marathon 2026.">
+  <meta name="theme-color" content="#F5F3EE">
   <title>Training Log · Duarte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:     #F9F8F6;
-      --white:  #FFFFFF;
-      --border: #E4E2DF;
-      --text:   #1C1917;
-      --dim:    #6B6B68;
-      --muted:  #A8A29E;
-      --sans:   -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      --mono:   ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, monospace;
+      --bg:      #F5F3EE;
+      --surface: #FFFFFF;
+      --border:  #E5E2DB;
+      --text:    #1A1A1A;
+      --dim:     #6B6660;
+      --muted:   #A39E96;
+      --accent:  #C4704B;
+      --sans:    'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --mono:    ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, monospace;
     }
 
     html { font-size: 16px; }
@@ -27,43 +32,69 @@
       color: var(--text);
       font-family: var(--sans);
       font-size: 0.875rem;
-      line-height: 1.6;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
-      padding: 56px 24px 96px;
     }
 
-    .wrap { max-width: 680px; margin: 0 auto; }
+    .app {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 48px 24px 96px;
+    }
 
-    /* ── Header ── */
-    header {
+    /* ── Nav ── */
+    nav {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 56px;
+      margin-bottom: 48px;
     }
 
-    .name {
+    .nav-brand-name {
       font-size: 0.9375rem;
       font-weight: 600;
-      letter-spacing: -0.015em;
-      margin-bottom: 2px;
+      letter-spacing: -0.01em;
     }
 
-    .sub { font-size: 0.8125rem; color: var(--muted); }
+    .nav-brand-sub {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
 
-    .date-today { font-size: 0.8125rem; color: var(--muted); text-align: right; }
+    .nav-links {
+      display: flex;
+      gap: 0;
+    }
 
-    /* ── Divider ── */
-    .div { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
+    .nav-link {
+      padding: 6px 14px;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.15s;
+      border-bottom: 1.5px solid transparent;
+    }
 
-    /* ── Section label ── */
-    .lbl {
+    .nav-link:hover { color: var(--text); }
+    .nav-link.active { color: var(--text); border-bottom-color: var(--text); }
+
+    /* ── Section ── */
+    .section { margin-bottom: 40px; }
+
+    .label {
       font-size: 0.6875rem;
       font-weight: 500;
-      letter-spacing: 0.09em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 40px 0;
     }
 
     /* ── Races ── */
@@ -71,67 +102,96 @@
 
     .race-days {
       font-family: var(--mono);
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-weight: 500;
       letter-spacing: -0.04em;
       line-height: 1;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .race-days-unit {
       font-family: var(--sans);
-      font-size: 0.875rem;
+      font-size: 0.8125rem;
       font-weight: 400;
       color: var(--muted);
-      letter-spacing: 0;
-      margin-left: 6px;
+      margin-left: 4px;
     }
 
-    .race-name { font-size: 0.9375rem; font-weight: 500; margin-bottom: 2px; }
-    .race-meta { font-size: 0.8125rem; color: var(--dim); }
+    .race-name { font-size: 0.875rem; font-weight: 500; margin-bottom: 2px; }
+    .race-meta { font-size: 0.75rem; color: var(--dim); }
 
     /* ── Stats ── */
-    .stats { display: flex; }
+    .stats {
+      display: flex;
+    }
 
     .stat { flex: 1; }
-
-    .stat + .stat { border-left: 1px solid var(--border); padding-left: 28px; }
+    .stat + .stat { border-left: 1px solid var(--border); padding-left: 24px; }
 
     .stat-val {
       font-family: var(--mono);
-      font-size: 1.875rem;
+      font-size: 1.5rem;
       font-weight: 500;
       letter-spacing: -0.03em;
       line-height: 1;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
-    .stat-lbl { font-size: 0.75rem; color: var(--dim); }
+    .stat-lbl {
+      font-size: 0.6875rem;
+      color: var(--dim);
+    }
 
-    /* ── Activities table ── */
-    .acts { width: 100%; border-collapse: collapse; }
+    /* ── Charts ── */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
 
-    .acts tbody tr { border-bottom: 1px solid var(--border); }
-    .acts tbody tr:last-child { border-bottom: none; }
-    .acts td { padding: 11px 0; vertical-align: middle; }
+    .chart-wrap { }
+
+    .chart-title {
+      font-size: 0.75rem;
+      color: var(--dim);
+      margin-bottom: 12px;
+    }
+
+    .chart-box {
+      position: relative;
+      height: 140px;
+    }
+
+    /* ── Activity rows ── */
+    .act-row {
+      display: grid;
+      grid-template-columns: 52px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .act-row:last-child { border-bottom: none; }
 
     .act-date {
       font-family: var(--mono);
       font-size: 0.6875rem;
       color: var(--muted);
-      white-space: nowrap;
-      padding-right: 20px;
-      letter-spacing: 0.02em;
     }
 
-    .act-name { font-size: 0.875rem; font-weight: 500; }
-    .act-kind { font-size: 0.75rem; color: var(--muted); }
+    .act-name { font-size: 0.8125rem; font-weight: 500; }
 
-    .act-nums { text-align: right; white-space: nowrap; }
+    .act-type {
+      font-size: 0.6875rem;
+      color: var(--dim);
+    }
+
+    .act-nums { text-align: right; }
 
     .act-dist {
       font-family: var(--mono);
-      font-size: 0.875rem;
+      font-size: 0.8125rem;
       font-weight: 500;
     }
 
@@ -141,269 +201,723 @@
       color: var(--muted);
     }
 
-    /* ── Calendar events ── */
-    .event {
+    /* ── Week list ── */
+    .week-row {
       display: grid;
-      grid-template-columns: 72px 1fr auto;
+      grid-template-columns: 1fr auto;
       gap: 16px;
-      align-items: baseline;
-      padding: 11px 0;
+      align-items: center;
+      padding: 12px 0;
       border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: opacity 0.15s;
     }
 
-    .event:last-child { border-bottom: none; }
+    .week-row:last-child { border-bottom: none; }
+    .week-row:hover { opacity: 0.7; }
 
-    .ev-date {
+    .week-row-id {
       font-family: var(--mono);
-      font-size: 0.6875rem;
-      color: var(--muted);
-      letter-spacing: 0.02em;
-    }
-
-    .ev-title { font-size: 0.875rem; }
-
-    .ev-time {
-      font-family: var(--mono);
-      font-size: 0.6875rem;
-      color: var(--muted);
-    }
-
-    /* ── Coaching notes ── */
-    .notes-date { font-size: 0.75rem; color: var(--muted); margin-bottom: 16px; }
-
-    .notes-body { font-size: 0.875rem; line-height: 1.75; margin-bottom: 24px; }
-
-    .obs { list-style: none; border-top: 1px solid var(--border); }
-
-    .obs li {
-      padding: 10px 0 10px 16px;
-      position: relative;
       font-size: 0.8125rem;
-      color: var(--dim);
-      border-bottom: 1px solid var(--border);
-      line-height: 1.5;
-    }
-
-    .obs li:last-child { border-bottom: none; }
-
-    .obs li::before { content: '–'; position: absolute; left: 0; color: var(--muted); }
-
-    .focus {
-      margin-top: 24px;
-      padding: 16px 20px;
-      border: 1px solid var(--border);
-      background: var(--white);
-    }
-
-    .focus-lbl {
-      font-size: 0.6875rem;
       font-weight: 500;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 8px;
     }
 
-    .focus-body { font-size: 0.875rem; line-height: 1.65; }
-
-    /* ── Footer ── */
-    footer {
-      margin-top: 64px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
+    .week-row-meta {
       font-size: 0.75rem;
       color: var(--muted);
     }
 
-    /* ── Empty state ── */
+    .week-row-stat {
+      font-family: var(--mono);
+      font-size: 0.8125rem;
+      color: var(--dim);
+    }
+
+    /* ═══════════════════════════════════ */
+    /* ── WEEKLY VIEW                   ── */
+    /* ═══════════════════════════════════ */
+
+    .week-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    .week-nav-btn {
+      font-family: var(--sans);
+      font-size: 0.8125rem;
+      color: var(--dim);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px 0;
+      transition: color 0.15s;
+    }
+
+    .week-nav-btn:hover { color: var(--text); }
+    .week-nav-btn:disabled { opacity: 0.25; cursor: default; }
+
+    .week-title {
+      font-family: var(--mono);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .week-range {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* ── Plan / Review blocks ── */
+    .prose-block {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .prose-block:last-child { border-bottom: none; }
+
+    .prose-label {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .prose-body {
+      font-size: 0.8125rem;
+      line-height: 1.7;
+      color: var(--dim);
+    }
+
+    .obs-list {
+      list-style: none;
+      margin-top: 12px;
+    }
+
+    .obs-list li {
+      font-size: 0.8125rem;
+      color: var(--dim);
+      padding: 5px 0 5px 16px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .obs-list li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+    }
+
+    /* ── Day cards ── */
+    .day-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .day-item:last-child { border-bottom: none; }
+
+    .day-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 14px 0;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .day-header:hover { opacity: 0.7; }
+
+    .day-name {
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+
+    .day-today {
+      font-size: 0.6875rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-left: 6px;
+    }
+
+    .day-date {
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    .day-plan-text {
+      font-size: 0.75rem;
+      color: var(--dim);
+      margin-top: 2px;
+    }
+
+    .day-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .day-km {
+      font-family: var(--mono);
+      font-size: 0.8125rem;
+      font-weight: 500;
+    }
+
+    .day-status {
+      font-size: 0.8125rem;
+      width: 20px;
+      text-align: center;
+    }
+
+    .s-done { color: var(--text); }
+    .s-missed { color: var(--muted); }
+    .s-pending { color: var(--muted); }
+
+    .day-body {
+      padding: 0 0 20px;
+      display: none;
+    }
+
+    .day-item.open .day-body { display: block; }
+
+    .day-metrics {
+      display: flex;
+      gap: 0;
+      margin-bottom: 16px;
+    }
+
+    .dm { flex: 1; }
+    .dm + .dm { border-left: 1px solid var(--border); padding-left: 16px; }
+
+    .dm-val {
+      font-family: var(--mono);
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+
+    .dm-lbl {
+      font-size: 0.625rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .day-comment-block {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .day-comment-text {
+      font-size: 0.8125rem;
+      line-height: 1.65;
+      color: var(--dim);
+      margin-bottom: 12px;
+    }
+
+    .day-list-heading {
+      font-size: 0.625rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+
+    .day-list {
+      list-style: none;
+    }
+
+    .day-list li {
+      font-size: 0.75rem;
+      color: var(--dim);
+      padding: 3px 0 3px 14px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .day-list li::before {
+      position: absolute;
+      left: 0;
+      color: var(--muted);
+      font-size: 0.6875rem;
+    }
+
+    .dl-right li::before { content: '✓'; }
+    .dl-improve li::before { content: '→'; }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 56px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.6875rem;
+      color: var(--muted);
+    }
+
+    /* ── Empty ── */
     .empty { font-size: 0.8125rem; color: var(--muted); padding: 4px 0; }
+
+    /* ── Transitions ── */
+    .view { animation: fadeUp 0.2s ease; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
     /* ── Responsive ── */
     @media (max-width: 500px) {
-      body { padding: 36px 20px 72px; }
-      header { flex-direction: column; gap: 6px; }
-      .date-today { text-align: left; }
-      .races { grid-template-columns: 1fr; gap: 28px; }
-      .event { grid-template-columns: 60px 1fr auto; gap: 10px; }
+      .app { padding: 32px 20px 72px; }
+      nav { flex-direction: column; gap: 8px; align-items: flex-start; }
+      .races { grid-template-columns: 1fr; gap: 24px; }
+      .stats { flex-wrap: wrap; gap: 16px; }
+      .stat + .stat { border-left: none; padding-left: 0; }
+      .charts-grid { grid-template-columns: 1fr; }
+      .day-metrics { flex-wrap: wrap; gap: 12px; }
+      .dm + .dm { border-left: none; padding-left: 0; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-
-    <header>
+  <div class="app">
+    <nav>
       <div>
-        <div class="name">Duarte Cardoso</div>
-        <div class="sub">Training Log</div>
+        <div class="nav-brand-name">Duarte Cardoso</div>
+        <div class="nav-brand-sub">Training Log</div>
       </div>
-      <div class="date-today" id="js-today"></div>
-    </header>
+      <div class="nav-links">
+        <a class="nav-link active" data-view="home" id="nav-home">Home</a>
+        <a class="nav-link" data-view="weekly" id="nav-weekly">Weekly</a>
+      </div>
+    </nav>
 
-    <div class="lbl">Races</div>
-    <div class="races" id="js-races"></div>
-
-    <hr class="div">
-
-    <div class="lbl">This Week</div>
-    <div class="stats" id="js-stats"><div class="empty">Awaiting first sync</div></div>
-
-    <hr class="div">
-
-    <div class="lbl">Recent Activities</div>
-    <table class="acts"><tbody id="js-acts"><tr><td class="empty">Awaiting first sync</td></tr></tbody></table>
-
-    <hr class="div">
-
-    <div class="lbl">Upcoming</div>
-    <div id="js-events"><div class="empty">Awaiting first sync</div></div>
-
-    <hr class="div">
-
-    <div class="lbl">Notes</div>
-    <div id="js-notes"><div class="empty">Awaiting first sync</div></div>
+    <main id="app-main"></main>
 
     <footer>
       <span>Last synced <span id="js-synced">—</span></span>
       <span>Porto · 2026</span>
     </footer>
-
   </div>
+
   <script>
+    /* ══════════ CONFIG ══════════ */
     const RACES = [
       { name: 'Half Marathon', city: 'Porto', date: '2026-09-13' },
       { name: 'Marathon',      city: 'Porto', date: '2026-11-08' },
     ];
 
+    /* ══════════ UTILS ══════════ */
     function daysTo(iso) {
-      const target = new Date(iso + 'T00:00:00');
-      const today  = new Date(); today.setHours(0,0,0,0);
-      return Math.ceil((target - today) / 86400000);
+      const t = new Date(iso + 'T00:00:00');
+      const n = new Date(); n.setHours(0,0,0,0);
+      return Math.ceil((t - n) / 86400000);
     }
-
     function fmtShort(iso) {
-      return new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+      return new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { day:'numeric', month:'short' });
     }
-
     function fmtLong(iso) {
-      return new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      return new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+    }
+    function fmtRange(a, b) {
+      return fmtShort(a) + ' – ' + fmtShort(b);
     }
 
-    // Header date
-    document.getElementById('js-today').textContent = new Date().toLocaleDateString('en-GB', {
-      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+    async function fetchJSON(p) {
+      const r = await fetch('data/' + p);
+      return r.ok ? r.json() : null;
+    }
+
+    /* ══════════ STATE ══════════ */
+    let manifest = null;
+    const wCache = {}, dCache = {};
+    let charts = {};
+
+    async function loadManifest() { manifest = await fetchJSON('manifest.json'); return manifest; }
+    async function loadWeek(id) { return wCache[id] ??= await fetchJSON(`weeks/${id}/week.json`); }
+    async function loadDay(wk, f) { const k = wk+'/'+f; return dCache[k] ??= await fetchJSON(`weeks/${wk}/${f}.json`); }
+
+    async function loadAll() {
+      if (!manifest) return [];
+      const out = [];
+      for (const w of manifest.weeks) {
+        const wd = await loadWeek(w.week_id);
+        const ds = [];
+        for (const f of w.days) { const d = await loadDay(w.week_id, f); if (d) ds.push(d); }
+        out.push({ ...w, wd, ds });
+      }
+      return out;
+    }
+
+    /* ══════════ ROUTER ══════════ */
+    function getRoute() {
+      const h = location.hash || '#/';
+      if (h.startsWith('#/week/')) return { v:'weekly', id: h.replace('#/week/','') };
+      return { v:'home' };
+    }
+
+    function nav(h) { location.hash = h; }
+
+    async function route() {
+      const r = getRoute();
+      const el = document.getElementById('app-main');
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      document.getElementById(r.v === 'home' ? 'nav-home' : 'nav-weekly').classList.add('active');
+      Object.values(charts).forEach(c => c.destroy()); charts = {};
+      if (!manifest) await loadManifest();
+      if (r.v === 'weekly') {
+        const id = r.id || manifest?.weeks?.at(-1)?.week_id;
+        id ? await renderWeek(el, id) : (el.innerHTML = '<div class="empty">No weeks yet</div>');
+      } else {
+        await renderHome(el);
+      }
+    }
+
+    /* ══════════ HOME ══════════ */
+    async function renderHome(el) {
+      const weeks = await loadAll();
+      const today = new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+
+      let totKm=0, totRuns=0, longest=0, bestP=Infinity;
+      const allDays = [];
+      weeks.forEach(w => w.ds.forEach(d => {
+        allDays.push(d);
+        if (d.activity?.type === 'run') {
+          totKm += d.activity.distance_km || 0;
+          totRuns++;
+          if (d.activity.distance_km > longest) longest = d.activity.distance_km;
+          if (d.activity.pace_per_km) {
+            const [m,s] = d.activity.pace_per_km.split(':').map(Number);
+            const sec = m*60+s;
+            if (sec < bestP) bestP = sec;
+          }
+        }
+      }));
+      const bestStr = bestP < Infinity ? `${Math.floor(bestP/60)}:${String(bestP%60).padStart(2,'0')}` : '—';
+
+      const recent = allDays.filter(d => d.activity).sort((a,b) => b.date.localeCompare(a.date)).slice(0,6);
+
+      el.innerHTML = `
+        <div class="view">
+          <div class="section">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px">
+              <div class="label" style="margin-bottom:0">Races</div>
+              <div style="font-size:0.75rem;color:var(--muted)">${today}</div>
+            </div>
+            <div class="races">
+              ${RACES.map(r => `
+                <div>
+                  <div class="race-days">${daysTo(r.date)}<span class="race-days-unit">days</span></div>
+                  <div class="race-name">${r.name}</div>
+                  <div class="race-meta">${fmtLong(r.date)} · ${r.city}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <hr class="divider">
+
+          <div class="section">
+            <div class="label">Overview</div>
+            <div class="stats">
+              <div class="stat">
+                <div class="stat-val">${totKm.toFixed(1)}</div>
+                <div class="stat-lbl">total km</div>
+              </div>
+              <div class="stat">
+                <div class="stat-val">${totRuns}</div>
+                <div class="stat-lbl">runs</div>
+              </div>
+              <div class="stat">
+                <div class="stat-val">${longest.toFixed(1)}</div>
+                <div class="stat-lbl">longest</div>
+              </div>
+              <div class="stat">
+                <div class="stat-val">${bestStr}</div>
+                <div class="stat-lbl">best pace</div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="divider">
+
+          <div class="section">
+            <div class="label">Trends</div>
+            <div class="charts-grid">
+              <div class="chart-wrap">
+                <div class="chart-title">Km per week</div>
+                <div class="chart-box"><canvas id="c-km"></canvas></div>
+              </div>
+              <div class="chart-wrap">
+                <div class="chart-title">Runs per week</div>
+                <div class="chart-box"><canvas id="c-runs"></canvas></div>
+              </div>
+              <div class="chart-wrap">
+                <div class="chart-title">Completion</div>
+                <div class="chart-box"><canvas id="c-comp"></canvas></div>
+              </div>
+              <div class="chart-wrap">
+                <div class="chart-title">Avg pace</div>
+                <div class="chart-box"><canvas id="c-pace"></canvas></div>
+              </div>
+            </div>
+          </div>
+
+          <hr class="divider">
+
+          <div class="section">
+            <div class="label">Recent</div>
+            ${recent.length === 0 ? '<div class="empty">No activities yet</div>' :
+              recent.map(d => `
+                <div class="act-row">
+                  <div class="act-date">${fmtShort(d.date)}</div>
+                  <div>
+                    <div class="act-name">${d.activity.run_type || 'run'}</div>
+                    <div class="act-type">${d.activity.run_type || ''}</div>
+                  </div>
+                  <div class="act-nums">
+                    <div class="act-dist">${d.activity.distance_km} km</div>
+                    <div class="act-pace">${d.activity.pace_per_km}/km · ${d.activity.duration_minutes}'</div>
+                  </div>
+                </div>
+              `).join('')}
+          </div>
+
+          <hr class="divider">
+
+          <div class="section">
+            <div class="label">Weeks</div>
+            ${weeks.slice().reverse().map(w => {
+              const rv = w.wd?.review;
+              const km = rv?.total_km ?? 0;
+              const runs = rv?.total_runs ?? 0;
+              return `
+                <div class="week-row" onclick="nav('#/week/${w.week_id}')">
+                  <div>
+                    <div class="week-row-id">${w.week_id}</div>
+                    <div class="week-row-meta">${fmtRange(w.start_date, w.end_date)}${rv ? ` · ${Math.round(rv.completion_rate*100)}%` : ''}</div>
+                  </div>
+                  <div class="week-row-stat">${km.toFixed(1)} km · ${runs} runs</div>
+                </div>`;
+            }).join('')}
+          </div>
+        </div>
+      `;
+
+      buildCharts(weeks);
+      if (manifest?.updated_at) {
+        document.getElementById('js-synced').textContent = new Date(manifest.updated_at)
+          .toLocaleDateString('en-GB', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
+      }
+    }
+
+    /* ══════════ CHARTS ══════════ */
+    function buildCharts(weeks) {
+      const labels = weeks.map(w => w.week_id.replace('2026-',''));
+      const kmD = weeks.map(w => w.wd?.review?.total_km ?? w.ds.reduce((s,d) => s+(d.activity?.distance_km||0), 0));
+      const runsD = weeks.map(w => w.wd?.review?.total_runs ?? w.ds.filter(d => d.activity?.type==='run').length);
+      const compD = weeks.map(w => {
+        if (w.wd?.review?.completion_rate != null) return Math.round(w.wd.review.completion_rate*100);
+        if (!w.wd?.plan?.sessions?.length) return 0;
+        return Math.round(w.ds.filter(d => d.completed).length / w.wd.plan.sessions.length * 100);
+      });
+      const paceD = weeks.map(w => {
+        const rs = w.ds.filter(d => d.activity?.pace_per_km);
+        if (!rs.length) return null;
+        return rs.reduce((s,d) => { const [m,sec] = d.activity.pace_per_km.split(':').map(Number); return s+m*60+sec; }, 0) / rs.length / 60;
+      });
+
+      const base = {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false },
+          tooltip: { backgroundColor:'#1A1A1A', titleFont:{family:"'Inter'",size:11}, bodyFont:{family:'ui-monospace',size:11}, cornerRadius:4, padding:8, borderColor:'#E5E2DB', borderWidth:1, titleColor:'#fff', bodyColor:'#ccc' }
+        },
+        scales: {
+          x: { grid:{display:false}, ticks:{color:'#A39E96',font:{size:9,family:'ui-monospace'}}, border:{display:false} },
+          y: { grid:{color:'#E5E2DB',lineWidth:0.5}, ticks:{color:'#A39E96',font:{size:9,family:'ui-monospace'}}, border:{display:false}, beginAtZero:true }
+        }
+      };
+
+      const barStyle = { backgroundColor:'rgba(26,26,26,0.15)', borderColor:'rgba(26,26,26,0.4)', borderWidth:1, borderRadius:3, barPercentage:0.55 };
+      const lineStyle = { borderColor:'rgba(26,26,26,0.4)', backgroundColor:'rgba(26,26,26,0.04)', borderWidth:1.5, pointRadius:3, pointBackgroundColor:'#1A1A1A', pointBorderColor:'transparent', fill:true, tension:0.3 };
+
+      const e = id => document.getElementById(id);
+
+      if (e('c-km')) charts.km = new Chart(e('c-km'), { type:'bar', data:{ labels, datasets:[{ data:kmD, ...barStyle }] }, options:{...base, plugins:{...base.plugins, tooltip:{...base.plugins.tooltip, callbacks:{label:c=>c.raw.toFixed(1)+' km'}}}} });
+      if (e('c-runs')) charts.runs = new Chart(e('c-runs'), { type:'bar', data:{ labels, datasets:[{ data:runsD, ...barStyle }] }, options:{...base, scales:{...base.scales, y:{...base.scales.y, ticks:{...base.scales.y.ticks,stepSize:1}}}, plugins:{...base.plugins, tooltip:{...base.plugins.tooltip, callbacks:{label:c=>c.raw+' runs'}}}} });
+      if (e('c-comp')) charts.comp = new Chart(e('c-comp'), { type:'line', data:{ labels, datasets:[{ data:compD, ...lineStyle }] }, options:{...base, scales:{...base.scales, y:{...base.scales.y, max:100, ticks:{...base.scales.y.ticks, callback:v=>v+'%'}}}, plugins:{...base.plugins, tooltip:{...base.plugins.tooltip, callbacks:{label:c=>c.raw+'%'}}}} });
+      if (e('c-pace')) charts.pace = new Chart(e('c-pace'), { type:'line', data:{ labels, datasets:[{ data:paceD, ...lineStyle, spanGaps:true }] }, options:{...base, scales:{...base.scales, y:{...base.scales.y, reverse:true, beginAtZero:false, ticks:{...base.scales.y.ticks, callback:v=>{const m=Math.floor(v),s=Math.round((v-m)*60);return m+':'+String(s).padStart(2,'0');}}}}, plugins:{...base.plugins, tooltip:{...base.plugins.tooltip, callbacks:{label:c=>{if(c.raw==null)return'—';const m=Math.floor(c.raw),s=Math.round((c.raw-m)*60);return m+':'+String(s).padStart(2,'0')+'/km';}}}}} });
+    }
+
+    /* ══════════ WEEKLY VIEW ══════════ */
+    async function renderWeek(el, id) {
+      const we = manifest?.weeks?.find(w => w.week_id === id);
+      if (!we) { el.innerHTML = '<div class="empty">Week not found</div>'; return; }
+
+      const wd = await loadWeek(id);
+      const ds = [];
+      for (const f of we.days) { const d = await loadDay(id, f); if (d) ds.push(d); }
+
+      const idx = manifest.weeks.findIndex(w => w.week_id === id);
+      const prev = idx > 0 ? manifest.weeks[idx-1].week_id : null;
+      const next = idx < manifest.weeks.length-1 ? manifest.weeks[idx+1].week_id : null;
+
+      const rv = wd?.review;
+      const plan = wd?.plan;
+      const wKm = rv?.total_km ?? ds.reduce((s,d) => s+(d.activity?.distance_km||0), 0);
+      const wRuns = rv?.total_runs ?? ds.filter(d => d.activity?.type==='run').length;
+      const wGym = rv?.total_gym_sessions ?? ds.filter(d => d.gym?.completed).length;
+      const wPace = rv?.avg_pace ?? '—';
+
+      const dayNames = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
+      const start = new Date(we.start_date + 'T12:00:00');
+      const allDays = dayNames.map((nm, i) => {
+        const dt = new Date(start); dt.setDate(dt.getDate() + i);
+        const iso = dt.toISOString().split('T')[0];
+        return { nm, iso, dd: ds.find(d => d.day_of_week===nm || d.date===iso), ps: plan?.sessions?.find(s => s.day===nm) };
+      });
+
+      el.innerHTML = `
+        <div class="view">
+          <div class="week-nav">
+            <button class="week-nav-btn" ${prev ? `onclick="nav('#/week/${prev}')"` : 'disabled'}>← Prev</button>
+            <div style="text-align:center">
+              <div class="week-title">${id}</div>
+              <div class="week-range">${fmtRange(we.start_date, we.end_date)}</div>
+            </div>
+            <button class="week-nav-btn" ${next ? `onclick="nav('#/week/${next}')"` : 'disabled'}>Next →</button>
+          </div>
+
+          <div class="section">
+            <div class="stats">
+              <div class="stat"><div class="stat-val">${wKm.toFixed(1)}</div><div class="stat-lbl">km</div></div>
+              <div class="stat"><div class="stat-val">${wRuns}</div><div class="stat-lbl">runs</div></div>
+              <div class="stat"><div class="stat-val">${wGym}</div><div class="stat-lbl">gym</div></div>
+              <div class="stat"><div class="stat-val">${wPace}</div><div class="stat-lbl">avg pace</div></div>
+            </div>
+          </div>
+
+          <hr class="divider">
+
+          ${plan ? `
+            <div class="prose-block">
+              <div class="prose-label">Plan</div>
+              <div class="prose-body">${plan.summary}</div>
+            </div>
+          ` : ''}
+
+          ${rv ? `
+            <div class="prose-block">
+              <div class="prose-label">Review</div>
+              <div class="prose-body">${rv.summary}</div>
+              ${rv.highlights?.length ? `
+                <ul class="obs-list">${rv.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
+              ` : ''}
+              ${rv.areas_to_improve?.length ? `
+                <div class="day-list-heading" style="margin-top:16px">To improve</div>
+                <ul class="obs-list">${rv.areas_to_improve.map(a => `<li>${a}</li>`).join('')}</ul>
+              ` : ''}
+            </div>
+          ` : ''}
+
+          <hr class="divider">
+
+          <div class="section">
+            <div class="label">Days</div>
+            ${allDays.map(d => dayCard(d)).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function dayCard({ nm, iso, dd, ps }) {
+      const now = new Date(); now.setHours(0,0,0,0);
+      const dt = new Date(iso + 'T00:00:00');
+      const future = dt > now;
+      const isToday = dt.getTime() === now.getTime();
+
+      let icon;
+      if (dd?.completed) icon = '✓';
+      else if (dd && !dd.completed) icon = '✗';
+      else if (ps?.type === 'rest') icon = '○';
+      else if (future || isToday) icon = '·';
+      else icon = '—';
+
+      const sClass = dd?.completed ? 's-done' : 's-missed';
+      const act = dd?.activity;
+      const gym = dd?.gym;
+      const cm = dd?.daily_comment;
+      const has = act || gym || cm;
+      const cid = 'day-' + iso;
+
+      return `
+        <div class="day-item" id="${cid}">
+          <div class="day-header" onclick="toggleDay('${cid}')">
+            <div>
+              <div class="day-name">${nm}${isToday ? '<span class="day-today">today</span>' : ''}</div>
+              <div class="day-date">${fmtShort(iso)}</div>
+              <div class="day-plan-text">${ps?.description || dd?.planned?.description || '—'}</div>
+            </div>
+            <div class="day-right">
+              ${act ? `<span class="day-km">${act.distance_km} km</span>` : ''}
+              <span class="day-status ${sClass}">${icon}</span>
+            </div>
+          </div>
+          ${has ? `
+            <div class="day-body">
+              ${act ? `
+                <div class="day-metrics">
+                  <div class="dm"><div class="dm-val">${act.distance_km}</div><div class="dm-lbl">km</div></div>
+                  <div class="dm"><div class="dm-val">${act.pace_per_km}</div><div class="dm-lbl">pace</div></div>
+                  <div class="dm"><div class="dm-val">${act.duration_minutes}'</div><div class="dm-lbl">time</div></div>
+                  ${act.heart_rate_avg ? `<div class="dm"><div class="dm-val">${act.heart_rate_avg}</div><div class="dm-lbl">hr avg</div></div>` : ''}
+                  ${act.elevation_m ? `<div class="dm"><div class="dm-val">${act.elevation_m}m</div><div class="dm-lbl">elev</div></div>` : ''}
+                </div>
+                <div class="act-type">${act.run_type || 'run'}${act.shoes ? ' · ' + act.shoes : ''}</div>
+              ` : ''}
+              ${gym ? `<div class="act-type" style="margin-top:4px">gym · ${gym.type || 'session'}${gym.completed ? ' ✓' : ''}</div>` : ''}
+              ${cm ? `
+                <div class="day-comment-block">
+                  <div class="day-comment-text">${cm.summary}</div>
+                  ${cm.did_right?.length ? `
+                    <div class="day-list-heading">What went right</div>
+                    <ul class="day-list dl-right">${cm.did_right.map(r => `<li>${r}</li>`).join('')}</ul>
+                  ` : ''}
+                  ${cm.to_improve?.length ? `
+                    <div class="day-list-heading">To improve</div>
+                    <ul class="day-list dl-improve">${cm.to_improve.map(r => `<li>${r}</li>`).join('')}</ul>
+                  ` : ''}
+                </div>
+              ` : ''}
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    function toggleDay(id) { document.getElementById(id)?.classList.toggle('open'); }
+
+    /* ══════════ NAV ══════════ */
+    document.getElementById('nav-home').addEventListener('click', () => nav('#/'));
+    document.getElementById('nav-weekly').addEventListener('click', () => {
+      nav('#/week/' + (manifest?.weeks?.at(-1)?.week_id || 'latest'));
     });
 
-    // Race countdowns (always visible, computed client-side)
-    document.getElementById('js-races').innerHTML = RACES.map(r => `
-      <div class="race">
-        <div class="race-days">${daysTo(r.date)}<span class="race-days-unit">days</span></div>
-        <div class="race-name">${r.name}</div>
-        <div class="race-meta">${fmtLong(r.date)} · ${r.city}</div>
-      </div>
-    `).join('');
-
-    // Activities + week summary
-    (async () => {
-      try {
-        const r = await fetch('data/activities.json');
-        if (!r.ok) throw new Error();
-        const d = await r.json();
-
-        const ws = d.week_summary;
-        document.getElementById('js-stats').innerHTML = ws
-          ? `
-            <div class="stat">
-              <div class="stat-val">${ws.total_distance_km ?? '—'}</div>
-              <div class="stat-lbl">km this week</div>
-            </div>
-            <div class="stat">
-              <div class="stat-val">${ws.total_runs ?? '—'}</div>
-              <div class="stat-lbl">runs</div>
-            </div>
-            <div class="stat">
-              <div class="stat-val">${ws.total_elevation_m ?? '—'}</div>
-              <div class="stat-lbl">m elevation</div>
-            </div>
-          `
-          : '<div class="empty">No data yet</div>';
-
-        const acts = d.recent_activities ?? [];
-        document.getElementById('js-acts').innerHTML = acts.length === 0
-          ? '<tr><td class="empty" colspan="3">No activities recorded</td></tr>'
-          : acts.map(a => `
-            <tr>
-              <td class="act-date">${fmtShort(a.date)}</td>
-              <td>
-                <div class="act-name">${a.name}</div>
-                ${a.type ? `<div class="act-kind">${a.type}</div>` : ''}
-              </td>
-              <td class="act-nums">
-                <div class="act-dist">${a.distance_km} km</div>
-                <div class="act-pace">${a.pace_per_km}/km · ${a.duration_minutes}'</div>
-              </td>
-            </tr>
-          `).join('');
-
-        if (d.updated_at) {
-          document.getElementById('js-synced').textContent = new Date(d.updated_at)
-            .toLocaleDateString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
-        }
-      } catch {
-        document.getElementById('js-stats').innerHTML = '<div class="empty">No data yet</div>';
-        document.getElementById('js-acts').innerHTML = '<tr><td class="empty" colspan="3">No data yet</td></tr>';
-      }
-    })();
-
-    // Calendar
-    (async () => {
-      try {
-        const r = await fetch('data/calendar.json');
-        if (!r.ok) throw new Error();
-        const d = await r.json();
-        const evts = d.upcoming_events ?? [];
-        document.getElementById('js-events').innerHTML = evts.length === 0
-          ? '<div class="empty">No upcoming events</div>'
-          : evts.map(e => `
-            <div class="event">
-              <div class="ev-date">${fmtShort(e.date)}</div>
-              <div class="ev-title">${e.title}</div>
-              <div class="ev-time">${e.time ?? ''}</div>
-            </div>
-          `).join('');
-      } catch {
-        document.getElementById('js-events').innerHTML = '<div class="empty">No data yet</div>';
-      }
-    })();
-
-    // Coaching notes
-    (async () => {
-      try {
-        const r = await fetch('data/coaching.json');
-        if (!r.ok) throw new Error();
-        const d = await r.json();
-        let out = '';
-        if (d.updated_at) {
-          out += `<div class="notes-date">Updated ${new Date(d.updated_at)
-            .toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}</div>`;
-        }
-        if (d.summary)                out += `<div class="notes-body">${d.summary}</div>`;
-        if (d.key_observations?.length) {
-          out += `<ul class="obs">${d.key_observations.map(o => `<li>${o}</li>`).join('')}</ul>`;
-        }
-        if (d.focus_next_week) {
-          out += `
-            <div class="focus">
-              <div class="focus-lbl">Focus this week</div>
-              <div class="focus-body">${d.focus_next_week}</div>
-            </div>`;
-        }
-        document.getElementById('js-notes').innerHTML = out || '<div class="empty">No notes yet</div>';
-      } catch {
-        document.getElementById('js-notes').innerHTML = '<div class="empty">No notes yet</div>';
-      }
-    })();
+    /* ══════════ INIT ══════════ */
+    addEventListener('hashchange', route);
+    route();
   </script>
 </body>
 </html>
