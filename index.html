@@ -317,9 +317,19 @@
     /* ── Day cards ── */
     .day-item {
       border-bottom: 1px solid var(--border);
+      border-left: 3px solid transparent;
+      padding-left: 16px;
+      margin-left: -16px;
+      transition: border-color 0.15s;
     }
 
     .day-item:last-child { border-bottom: none; }
+
+    .day-item.has-run { border-left-color: var(--accent); }
+    .day-item.has-gym { border-left-color: #B8AFA6; }
+    .day-item.has-both { border-left-color: var(--accent); }
+    .day-item.is-rest { border-left-color: transparent; }
+    .day-item.is-missed { border-left-color: #D4C5BC; border-left-style: dashed; }
 
     .day-header {
       display: grid;
@@ -377,16 +387,15 @@
       text-align: center;
     }
 
-    .s-done { color: var(--text); }
+    .s-done { color: var(--accent); }
     .s-missed { color: var(--muted); }
     .s-pending { color: var(--muted); }
 
     .day-body {
       padding: 0 0 20px;
-      display: none;
     }
 
-    .day-item.open .day-body { display: block; }
+    .day-item.collapsed .day-body { display: none; }
 
     .day-metrics {
       display: flex;
@@ -870,9 +879,17 @@
       const cm = dd?.daily_comment;
       const has = act || gym || cm;
       const cid = 'day-' + iso;
+      // Determine card type class for left border
+      let typeClass = '';
+      if (act && gym) typeClass = 'has-both';
+      else if (act?.type === 'run') typeClass = 'has-run';
+      else if (act) typeClass = 'has-run';
+      else if (gym?.completed) typeClass = 'has-gym';
+      else if (ps?.type === 'rest') typeClass = 'is-rest';
+      else if (dd && !dd.completed) typeClass = 'is-missed';
 
       return `
-        <div class="day-item" id="${cid}">
+        <div class="day-item ${typeClass}" id="${cid}">
           <div class="day-header" onclick="toggleDay('${cid}')">
             <div>
               <div class="day-name">${nm}${isToday ? '<span class="day-today">today</span>' : ''}</div>
@@ -926,7 +943,7 @@
       `;
     }
 
-    function toggleDay(id) { document.getElementById(id)?.classList.toggle('open'); }
+    function toggleDay(id) { document.getElementById(id)?.classList.toggle('collapsed'); }
 
     /* ══════════ NAV ══════════ */
     document.getElementById('nav-home').addEventListener('click', () => nav('#/'));

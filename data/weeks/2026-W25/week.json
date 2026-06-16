@@ -3,15 +3,15 @@
   "start_date": "2026-06-15",
   "end_date": "2026-06-21",
   "plan": {
-    "summary": "Key week: structured VO2max intervals on Wednesday, progressive long run targeting 19 km on Sunday. Gym sessions for upper body and core. Easy runs to maintain volume without fatigue.",
+    "summary": "Recovery-focused week after last week's 17.6 km long run and volleyball. Monday is absolute rest. Progressive build through the week towards a 19 km long run on Sunday at strict 6:30/km pace.",
     "sessions": [
-      { "day": "monday", "type": "run+gym", "description": "Easy run Zone 2 + Gym (Legs)" },
-      { "day": "tuesday", "type": "gym", "description": "Gym (Chest + Triceps)" },
-      { "day": "wednesday", "type": "run", "description": "VO2max intervals — 4×4 min at max effort with 3 min walking recovery" },
-      { "day": "thursday", "type": "run+gym", "description": "Easy run Zone 2 + Gym (Back + Biceps)" },
-      { "day": "friday", "type": "gym", "description": "Gym (Shoulders + Abs)" },
-      { "day": "saturday", "type": "rest", "description": "Rest day — active recovery" },
-      { "day": "sunday", "type": "run", "description": "Long run — 19 km at easy pace (6:30-7:00/km)" }
+      { "day": "monday", "type": "rest", "description": "Absolute rest — no running, no gym. Full 24-hour shutdown to repair micro-tears from volleyball and 17.6 km effort." },
+      { "day": "tuesday", "type": "run+gym", "description": "Recovery run 6 km at 7:00-7:30/km (dog jog pace) + Gym Legs. Flush out lactic acid. Don't go to failure on squats/lunges." },
+      { "day": "wednesday", "type": "gym", "description": "Gym — Chest + Triceps. Let legs recover from Tuesday's gym while keeping upper body progression." },
+      { "day": "thursday", "type": "run", "description": "Threshold session — 6.5 km total: 1 km warm-up (6:30/km), 4.5 km at 4:45-4:55/km, 1 km cool-down (6:30/km). Stretch the threshold engine." },
+      { "day": "friday", "type": "run+gym", "description": "Recovery run 5 km at 7:00-7:30/km (dog jog) + Gym Back + Biceps. Prevent legs from locking up after Thursday's speed session." },
+      { "day": "saturday", "type": "gym", "description": "Gym — Shoulders + Abs. Zero leg stress. Focus on planks and core stability to prepare chassis for Sunday." },
+      { "day": "sunday", "type": "run", "description": "Long run — 19 km at 6:30/km. Adding ~1.5 km to distance. MUST respect 6:30/km pace — running faster will drain CNS for the entire following week." }
     ]
   },
   "review": null,
