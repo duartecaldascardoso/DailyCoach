@@ -1,6 +1,10 @@
 {
-  "updated_at": null,
-  "summary": null,
-  "key_observations": [],
-  "focus_next_week": null
+  "updated_at": "2026-06-16T07:00:00Z",
+  "summary": "The week of June 8–14 closed with 32.0 km across 4 runs, anchored by a strong 17.6 km long run at 6:17/km with 106m elevation on Sunday. The current week (June 15–21) is just starting — no runs logged on Monday or Tuesday yet — placing you in a brief recovery window before Wednesday's scheduled VO2max session. With the Porto Half Marathon 89 days out and the Marathon 145 days out, you are in the early base-building phase where aerobic volume and weekly long run progression are the top priorities.",
+  "key_observations": [
+    "The 17.6 km long run on June 14 at 6:17/km is the strongest aerobic stimulus of the last 14 days — 106m of elevation adds good neuromuscular load; extending this to 19–21 km over the next 3–4 Sundays is the single most important step toward half marathon readiness.",
+    "The 5.0 km at 4:48/km on June 11 shows solid speed, but replacing ad-hoc fast efforts with Wednesday's structured VO2max intervals (4×4 min at max effort with 3 min walking recovery) will produce more reliable aerobic ceiling gains.",
+    "Outside the long run, weekly easy volume (6.0 km + 3.4 km) is on the low side for marathon base — adding one extra easy run of 8–10 km on a currently empty day would raise weekly aerobic stimulus without meaningful fatigue."
+  ],
+  "focus_next_week": "Execute Wednesday's VO2max interval session at true max effort while fully rested, then prioritise Sunday's long run — target 19 km at easy pace (6:30–7:00/km) to maintain progressive overload after last Sunday's 17.6 km."
 }

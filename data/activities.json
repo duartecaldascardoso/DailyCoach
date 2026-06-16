@@ -1,5 +1,83 @@
 {
-  "updated_at": null,
-  "week_summary": null,
-  "recent_activities": []
+  "updated_at": "2026-06-16T07:00:00Z",
+  "week_summary": {
+    "total_distance_km": 0.0,
+    "total_runs": 0,
+    "total_elevation_m": 0,
+    "total_time_minutes": 0
+  },
+  "recent_activities": [
+    {
+      "date": "2026-06-14",
+      "name": "Corrida matinal",
+      "distance_km": 17.6,
+      "pace_per_km": "6:17",
+      "duration_minutes": 111,
+      "elevation_m": 106,
+      "type": "long"
+    },
+    {
+      "date": "2026-06-11",
+      "name": "Corrida ao entardecer",
+      "distance_km": 5.0,
+      "pace_per_km": "4:48",
+      "duration_minutes": 24,
+      "elevation_m": 16,
+      "type": "tempo"
+    },
+    {
+      "date": "2026-06-09",
+      "name": "Corrida ao entardecer",
+      "distance_km": 6.0,
+      "pace_per_km": "7:00",
+      "duration_minutes": 42,
+      "elevation_m": 23,
+      "type": "easy"
+    },
+    {
+      "date": "2026-06-08",
+      "name": "Easy run com a brownie 🐶",
+      "distance_km": 3.4,
+      "pace_per_km": "6:52",
+      "duration_minutes": 23,
+      "elevation_m": 27,
+      "type": "easy"
+    },
+    {
+      "date": "2026-06-07",
+      "name": "Easy run",
+      "distance_km": 3.3,
+      "pace_per_km": "6:19",
+      "duration_minutes": 21,
+      "elevation_m": 8,
+      "type": "easy"
+    },
+    {
+      "date": "2026-06-06",
+      "name": "Primeira corrida da maior",
+      "distance_km": 3.0,
+      "pace_per_km": "7:41",
+      "duration_minutes": 23,
+      "elevation_m": 9,
+      "type": "recovery"
+    },
+    {
+      "date": "2026-06-05",
+      "name": "Corrida vespertina",
+      "distance_km": 4.0,
+      "pace_per_km": "5:09",
+      "duration_minutes": 21,
+      "elevation_m": 30,
+      "type": "tempo"
+    },
+    {
+      "date": "2026-06-04",
+      "name": "Corrida com a Brownie",
+      "distance_km": 3.6,
+      "pace_per_km": "6:27",
+      "duration_minutes": 23,
+      "elevation_m": 35,
+      "type": "easy"
+    }
+  ]
 }
