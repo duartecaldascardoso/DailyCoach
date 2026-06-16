@@ -1,4 +1,30 @@
 {
-  "updated_at": null,
-  "upcoming_events": []
+  "updated_at": "2026-06-16T07:00:00Z",
+  "upcoming_events": [
+    {
+      "date": "2026-06-16",
+      "title": "Treino: Corrida Fácil (Zona 2) + Ginásio (Pernas)",
+      "time": "00:00"
+    },
+    {
+      "date": "2026-06-17",
+      "title": "Treino: Ginásio (Peito + Tríceps)",
+      "time": "00:00"
+    },
+    {
+      "date": "2026-06-18",
+      "title": "Treino: Corrida VO2 Máximo / Intervalos",
+      "time": "00:00"
+    },
+    {
+      "date": "2026-06-19",
+      "title": "Treino: Corrida Fácil (Zona 2) + Ginásio (Costas + Bíceps)",
+      "time": "00:00"
+    },
+    {
+      "date": "2026-06-20",
+      "title": "Treino: Ginásio (Ombros + Abdominais)",
+      "time": "00:00"
+    }
+  ]
 }
