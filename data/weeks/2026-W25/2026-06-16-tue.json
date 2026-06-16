@@ -2,8 +2,12 @@
   "date": "2026-06-16",
   "day_of_week": "tuesday",
   "week_id": "2026-W25",
-  "planned": null,
-  "completed": true,
+  "planned": {
+    "type": "gym",
+    "description": "Gym (Chest + Triceps)",
+    "calendar_event_id": "m5drh3btsk2bisuh3e4pvt6a6o_20260616"
+  },
+  "completed": false,
   "activity": {
     "type": "run",
     "run_type": "easy",
@@ -12,10 +16,26 @@
     "duration_minutes": 34,
     "heart_rate_avg": 154,
     "heart_rate_max": 166,
-    "elevation_m": 30.2,
+    "elevation_m": 30,
     "shoes": "Nike Vomero Plus",
     "strava_activity_id": "18942451658"
   },
-  "gym": null,
-  "daily_comment": null
+  "gym": {
+    "completed": false,
+    "type": "chest+triceps",
+    "duration_minutes": null,
+    "notes": "Not completed. Did unplanned easy run (5.0 km, 6:41/km) and afternoon bike ride (13.0 km, 44 min, avg HR 136 bpm, Strava #18946617795) instead."
+  },
+  "daily_comment": {
+    "summary": "Planned gym (Chest + Triceps) was skipped, but Duarte put in solid unplanned aerobic work — a 5.0 km easy run at lunch (6:41/km, avg HR 154 bpm) and a 13.0 km afternoon bike ride (avg HR 136 bpm, 39 segment PRs). The aerobic load is well-managed and shouldn't compromise tomorrow's key VO2max session, but upper body strength work was missed.",
+    "did_right": [
+      "Easy run perfectly executed at 6:41/km with avg HR 154 bpm — solidly aerobic, protecting legs ahead of Wednesday's 4×4 min VO2max intervals",
+      "Afternoon 13.0 km bike ride added low-impact aerobic volume at a controlled HR of 136 bpm without accumulating running load or muscle damage"
+    ],
+    "to_improve": [
+      "Planned Chest + Triceps gym session was skipped — upper body strength supports running posture and shoulder drive, increasingly important as long runs push toward 19 km; reschedule this session or merge with Friday's Shoulders + Abs",
+      "Two unplanned activities replaced a structured gym day — use the week plan proactively to balance running volume with strength work rather than defaulting to more cardio"
+    ],
+    "generated_at": "2026-06-16T18:30:00Z"
+  }
 }
