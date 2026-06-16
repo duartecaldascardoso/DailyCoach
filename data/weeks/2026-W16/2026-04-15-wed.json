@@ -1,0 +1,21 @@
+{
+  "date": "2026-04-15",
+  "day_of_week": "wednesday",
+  "week_id": "2026-W16",
+  "planned": null,
+  "completed": true,
+  "activity": {
+    "type": "bike",
+    "run_type": null,
+    "distance_km": 13.4,
+    "pace_per_km": null,
+    "duration_minutes": 51,
+    "heart_rate_avg": null,
+    "heart_rate_max": null,
+    "elevation_m": 42.7,
+    "shoes": null,
+    "strava_activity_id": "18122988823"
+  },
+  "gym": null,
+  "daily_comment": null
+}

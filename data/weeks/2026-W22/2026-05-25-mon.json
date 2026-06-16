@@ -1,0 +1,27 @@
+{
+  "date": "2026-05-25",
+  "day_of_week": "monday",
+  "week_id": "2026-W22",
+  "planned": null,
+  "completed": true,
+  "activity": {
+    "type": "run",
+    "run_type": "tempo",
+    "distance_km": 4.3,
+    "pace_per_km": "5:14",
+    "duration_minutes": 22,
+    "heart_rate_avg": 186,
+    "heart_rate_max": 201,
+    "elevation_m": 3.7,
+    "shoes": null,
+    "strava_activity_id": "18652021201"
+  },
+  "gym": {
+    "completed": true,
+    "type": "back+biceps",
+    "duration_minutes": 29,
+    "notes": "",
+    "strava_activity_id": "18651422917"
+  },
+  "daily_comment": null
+}
