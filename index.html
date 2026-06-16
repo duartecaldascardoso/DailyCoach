@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Duarte's marathon training log">
+  <meta name="theme-color" content="#F9F8F6">
+  <title>Training Log · Duarte</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:     #F9F8F6;
+      --white:  #FFFFFF;
+      --border: #E4E2DF;
+      --text:   #1C1917;
+      --dim:    #6B6B68;
+      --muted:  #A8A29E;
+      --sans:   -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --mono:   ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, monospace;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 56px 24px 96px;
+    }
+
+    .wrap { max-width: 680px; margin: 0 auto; }
+
+    /* ── Header ── */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 56px;
+    }
+
+    .name {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin-bottom: 2px;
+    }
+
+    .sub { font-size: 0.8125rem; color: var(--muted); }
+
+    .date-today { font-size: 0.8125rem; color: var(--muted); text-align: right; }
+
+    /* ── Divider ── */
+    .div { border: none; border-top: 1px solid var(--border); margin: 36px 0; }
+
+    /* ── Section label ── */
+    .lbl {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    /* ── Races ── */
+    .races { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+    .race-days {
+      font-family: var(--mono);
+      font-size: 3rem;
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .race-days-unit {
+      font-family: var(--sans);
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0;
+      margin-left: 6px;
+    }
+
+    .race-name { font-size: 0.9375rem; font-weight: 500; margin-bottom: 2px; }
+    .race-meta { font-size: 0.8125rem; color: var(--dim); }
+
+    /* ── Stats ── */
+    .stats { display: flex; }
+
+    .stat { flex: 1; }
+
+    .stat + .stat { border-left: 1px solid var(--border); padding-left: 28px; }
+
+    .stat-val {
+      font-family: var(--mono);
+      font-size: 1.875rem;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-lbl { font-size: 0.75rem; color: var(--dim); }
+
+    /* ── Activities table ── */
+    .acts { width: 100%; border-collapse: collapse; }
+
+    .acts tbody tr { border-bottom: 1px solid var(--border); }
+    .acts tbody tr:last-child { border-bottom: none; }
+    .acts td { padding: 11px 0; vertical-align: middle; }
+
+    .act-date {
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      color: var(--muted);
+      white-space: nowrap;
+      padding-right: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    .act-name { font-size: 0.875rem; font-weight: 500; }
+    .act-kind { font-size: 0.75rem; color: var(--muted); }
+
+    .act-nums { text-align: right; white-space: nowrap; }
+
+    .act-dist {
+      font-family: var(--mono);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .act-pace {
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      color: var(--muted);
+    }
+
+    /* ── Calendar events ── */
+    .event {
+      display: grid;
+      grid-template-columns: 72px 1fr auto;
+      gap: 16px;
+      align-items: baseline;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .event:last-child { border-bottom: none; }
+
+    .ev-date {
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    .ev-title { font-size: 0.875rem; }
+
+    .ev-time {
+      font-family: var(--mono);
+      font-size: 0.6875rem;
+      color: var(--muted);
+    }
+
+    /* ── Coaching notes ── */
+    .notes-date { font-size: 0.75rem; color: var(--muted); margin-bottom: 16px; }
+
+    .notes-body { font-size: 0.875rem; line-height: 1.75; margin-bottom: 24px; }
+
+    .obs { list-style: none; border-top: 1px solid var(--border); }
+
+    .obs li {
+      padding: 10px 0 10px 16px;
+      position: relative;
+      font-size: 0.8125rem;
+      color: var(--dim);
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+    }
+
+    .obs li:last-child { border-bottom: none; }
+
+    .obs li::before { content: '–'; position: absolute; left: 0; color: var(--muted); }
+
+    .focus {
+      margin-top: 24px;
+      padding: 16px 20px;
+      border: 1px solid var(--border);
+      background: var(--white);
+    }
+
+    .focus-lbl {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .focus-body { font-size: 0.875rem; line-height: 1.65; }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ── Empty state ── */
+    .empty { font-size: 0.8125rem; color: var(--muted); padding: 4px 0; }
+
+    /* ── Responsive ── */
+    @media (max-width: 500px) {
+      body { padding: 36px 20px 72px; }
+      header { flex-direction: column; gap: 6px; }
+      .date-today { text-align: left; }
+      .races { grid-template-columns: 1fr; gap: 28px; }
+      .event { grid-template-columns: 60px 1fr auto; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header>
+      <div>
+        <div class="name">Duarte Cardoso</div>
+        <div class="sub">Training Log</div>
+      </div>
+      <div class="date-today" id="js-today"></div>
+    </header>
+
+    <div class="lbl">Races</div>
+    <div class="races" id="js-races"></div>
+
+    <hr class="div">
+
+    <div class="lbl">This Week</div>
+    <div class="stats" id="js-stats"><div class="empty">Awaiting first sync</div></div>
+
+    <hr class="div">
+
+    <div class="lbl">Recent Activities</div>
+    <table class="acts"><tbody id="js-acts"><tr><td class="empty">Awaiting first sync</td></tr></tbody></table>
+
+    <hr class="div">
+
+    <div class="lbl">Upcoming</div>
+    <div id="js-events"><div class="empty">Awaiting first sync</div></div>
+
+    <hr class="div">
+
+    <div class="lbl">Notes</div>
+    <div id="js-notes"><div class="empty">Awaiting first sync</div></div>
+
+    <footer>
+      <span>Last synced <span id="js-synced">—</span></span>
+      <span>Porto · 2026</span>
+    </footer>
+
+  </div>
+  <script>
+    const RACES = [
+      { name: 'Half Marathon', city: 'Porto', date: '2026-09-13' },
+      { name: 'Marathon',      city: 'Porto', date: '2026-11-08' },
+    ];
+
+    function daysTo(iso) {
+      const target = new Date(iso + 'T00:00:00');
+      const today  = new Date(); today.setHours(0,0,0,0);
+      return Math.ceil((target - today) / 86400000);
+    }
+
+    function fmtShort(iso) {
+      return new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+    }
+
+    function fmtLong(iso) {
+      return new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    // Header date
+    document.getElementById('js-today').textContent = new Date().toLocaleDateString('en-GB', {
+      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+    });
+
+    // Race countdowns (always visible, computed client-side)
+    document.getElementById('js-races').innerHTML = RACES.map(r => `
+      <div class="race">
+        <div class="race-days">${daysTo(r.date)}<span class="race-days-unit">days</span></div>
+        <div class="race-name">${r.name}</div>
+        <div class="race-meta">${fmtLong(r.date)} · ${r.city}</div>
+      </div>
+    `).join('');
+
+    // Activities + week summary
+    (async () => {
+      try {
+        const r = await fetch('data/activities.json');
+        if (!r.ok) throw new Error();
+        const d = await r.json();
+
+        const ws = d.week_summary;
+        document.getElementById('js-stats').innerHTML = ws
+          ? `
+            <div class="stat">
+              <div class="stat-val">${ws.total_distance_km ?? '—'}</div>
+              <div class="stat-lbl">km this week</div>
+            </div>
+            <div class="stat">
+              <div class="stat-val">${ws.total_runs ?? '—'}</div>
+              <div class="stat-lbl">runs</div>
+            </div>
+            <div class="stat">
+              <div class="stat-val">${ws.total_elevation_m ?? '—'}</div>
+              <div class="stat-lbl">m elevation</div>
+            </div>
+          `
+          : '<div class="empty">No data yet</div>';
+
+        const acts = d.recent_activities ?? [];
+        document.getElementById('js-acts').innerHTML = acts.length === 0
+          ? '<tr><td class="empty" colspan="3">No activities recorded</td></tr>'
+          : acts.map(a => `
+            <tr>
+              <td class="act-date">${fmtShort(a.date)}</td>
+              <td>
+                <div class="act-name">${a.name}</div>
+                ${a.type ? `<div class="act-kind">${a.type}</div>` : ''}
+              </td>
+              <td class="act-nums">
+                <div class="act-dist">${a.distance_km} km</div>
+                <div class="act-pace">${a.pace_per_km}/km · ${a.duration_minutes}'</div>
+              </td>
+            </tr>
+          `).join('');
+
+        if (d.updated_at) {
+          document.getElementById('js-synced').textContent = new Date(d.updated_at)
+            .toLocaleDateString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+        }
+      } catch {
+        document.getElementById('js-stats').innerHTML = '<div class="empty">No data yet</div>';
+        document.getElementById('js-acts').innerHTML = '<tr><td class="empty" colspan="3">No data yet</td></tr>';
+      }
+    })();
+
+    // Calendar
+    (async () => {
+      try {
+        const r = await fetch('data/calendar.json');
+        if (!r.ok) throw new Error();
+        const d = await r.json();
+        const evts = d.upcoming_events ?? [];
+        document.getElementById('js-events').innerHTML = evts.length === 0
+          ? '<div class="empty">No upcoming events</div>'
+          : evts.map(e => `
+            <div class="event">
+              <div class="ev-date">${fmtShort(e.date)}</div>
+              <div class="ev-title">${e.title}</div>
+              <div class="ev-time">${e.time ?? ''}</div>
+            </div>
+          `).join('');
+      } catch {
+        document.getElementById('js-events').innerHTML = '<div class="empty">No data yet</div>';
+      }
+    })();
+
+    // Coaching notes
+    (async () => {
+      try {
+        const r = await fetch('data/coaching.json');
+        if (!r.ok) throw new Error();
+        const d = await r.json();
+        let out = '';
+        if (d.updated_at) {
+          out += `<div class="notes-date">Updated ${new Date(d.updated_at)
+            .toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}</div>`;
+        }
+        if (d.summary)                out += `<div class="notes-body">${d.summary}</div>`;
+        if (d.key_observations?.length) {
+          out += `<ul class="obs">${d.key_observations.map(o => `<li>${o}</li>`).join('')}</ul>`;
+        }
+        if (d.focus_next_week) {
+          out += `
+            <div class="focus">
+              <div class="focus-lbl">Focus this week</div>
+              <div class="focus-body">${d.focus_next_week}</div>
+            </div>`;
+        }
+        document.getElementById('js-notes').innerHTML = out || '<div class="empty">No notes yet</div>';
+      } catch {
+        document.getElementById('js-notes').innerHTML = '<div class="empty">No notes yet</div>';
+      }
+    })();
+  </script>
+</body>
+</html>
