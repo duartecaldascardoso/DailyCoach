@@ -1,0 +1,25 @@
+{
+  "date": "2026-06-17",
+  "day_of_week": "wednesday",
+  "week_id": "2026-W25",
+  "planned": {
+    "type": "run",
+    "description": "VO2max intervals — 4×4 min at max effort with 3 min walking recovery",
+    "calendar_event_id": "7gojqdctgum11tjhkglr2qcpr0_20260617"
+  },
+  "completed": false,
+  "activity": null,
+  "gym": null,
+  "daily_comment": {
+    "summary": "The key Wednesday VO2max session (4×4 min at max effort with 3 min walking recovery) was not recorded on Strava. The Google Calendar shows a Gym (Chest + Triceps) event for today — matching Tuesday's plan rather than Wednesday's — suggesting a possible day swap or the run was skipped. With 13 weeks to the Half Marathon in Porto, this interval session is the most important quality workout of the week and should not be dropped.",
+    "did_right": [
+      "A gym session (Chest + Triceps) appears to have been carried out per the calendar, keeping the upper-body routine on track."
+    ],
+    "to_improve": [
+      "Reschedule the VO2max 4×4 min intervals before Sunday's long run — Thursday or Friday are viable slots if the long run is still planned for Sunday.",
+      "Ensure all activities (including gym sessions) are logged on Strava or at minimum via manual entry to maintain a complete training record.",
+      "Clarify the weekly schedule mismatch: the calendar shows Gym (Chest + Triceps) on Wednesday but the plan assigns it to Tuesday — align calendar with week.json to avoid confusion."
+    ],
+    "generated_at": "2026-06-17T18:30:00Z"
+  }
+}
