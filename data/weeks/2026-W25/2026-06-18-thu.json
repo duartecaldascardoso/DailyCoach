@@ -1,0 +1,41 @@
+{
+  "date": "2026-06-18",
+  "day_of_week": "thursday",
+  "week_id": "2026-W25",
+  "planned": {
+    "type": "run+gym",
+    "description": "Easy run Zone 2 + Gym (Back + Biceps)",
+    "calendar_event_id": "up080kd5arist6vga205114b3g_20260618"
+  },
+  "completed": true,
+  "activity": {
+    "type": "run",
+    "run_type": "easy",
+    "distance_km": 4.1,
+    "pace_per_km": "6:03",
+    "duration_minutes": 25,
+    "heart_rate_avg": 160,
+    "heart_rate_max": 180,
+    "elevation_m": 14,
+    "shoes": "Nike Vomero Plus",
+    "strava_activity_id": "18974527890"
+  },
+  "gym": {
+    "completed": true,
+    "type": "back+biceps",
+    "duration_minutes": null,
+    "notes": ""
+  },
+  "daily_comment": {
+    "summary": "Completed the planned Thursday session — 4.1 km easy run at 6:03/km plus Back + Biceps gym (confirmed via calendar). While the pace sits just inside the easy range, average HR of 160 bpm with a max of 180 bpm is well above Zone 2 targets, suggesting the effort was considerably harder than intended aerobic work.",
+    "did_right": [
+      "Completed both run and gym as planned, maintaining full training consistency on a run+gym day",
+      "Pace of 6:03/km stayed within the easy zone definition (≥6:00/km), avoiding back-to-back hard sessions"
+    ],
+    "to_improve": [
+      "HR avg of 160 bpm far exceeds Zone 2 (target ≤145 bpm) — slow to ≥6:30/km on easy days to keep the aerobic stimulus honest and protect recovery ahead of Sunday's 19 km long run",
+      "4.1 km is too short for a Thursday easy run building toward a half marathon on 13 Sep — aim for 7–9 km to accumulate meaningful aerobic volume without extra fatigue"
+    ],
+    "generated_at": "2026-06-18T20:30:00Z"
+  }
+}
