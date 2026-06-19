@@ -1,0 +1,41 @@
+{
+  "date": "2026-06-19",
+  "day_of_week": "friday",
+  "week_id": "2026-W25",
+  "planned": {
+    "type": "gym",
+    "description": "Gym (Shoulders + Abs)",
+    "calendar_event_id": "rpo70s8rn4461n51904j038f58_20260619"
+  },
+  "completed": true,
+  "activity": {
+    "type": "run",
+    "run_type": "easy",
+    "distance_km": 6.0,
+    "pace_per_km": "6:36",
+    "duration_minutes": 40,
+    "heart_rate_avg": 154,
+    "heart_rate_max": 165,
+    "elevation_m": 33,
+    "shoes": "Nike Vomero Plus",
+    "strava_activity_id": "18981078145"
+  },
+  "gym": {
+    "completed": false,
+    "type": "shoulders+abs",
+    "duration_minutes": null,
+    "notes": "No confirmation of gym session (Shoulders + Abs) — not tracked via Strava or calendar"
+  },
+  "daily_comment": {
+    "summary": "Friday was planned as a gym-only day (Shoulders + Abs), but instead a 6.0 km easy run was completed at 6:36/km with an avg HR of 154 bpm — a bonus aerobic session that adds volume to an already structured week. The gym session has no evidence of completion, which is a gap heading into Saturday rest and Sunday's 19 km long run.",
+    "did_right": [
+      "Solid 6.0 km at 6:36/km — controlled easy effort that builds aerobic base without accumulating fatigue",
+      "Maintained consistent running frequency; the extra session shows good training habits even on non-run days"
+    ],
+    "to_improve": [
+      "Avg HR of 154 bpm at 6:36/km is above typical Zone 2 ceiling — aim to keep HR below ~145 bpm on easy days to ensure true aerobic base stimulus",
+      "Confirm or reschedule the Shoulders + Abs gym session — skipping upper body work disrupts the weekly strength structure, and there is no makeup slot before Sunday's long run"
+    ],
+    "generated_at": "2026-06-19T12:00:00Z"
+  }
+}
