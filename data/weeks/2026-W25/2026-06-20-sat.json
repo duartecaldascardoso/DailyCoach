@@ -1,0 +1,41 @@
+{
+  "date": "2026-06-20",
+  "day_of_week": "saturday",
+  "week_id": "2026-W25",
+  "planned": {
+    "type": "rest",
+    "description": "Rest day — active recovery",
+    "calendar_event_id": "bauo5c5brssgivk2rqbs8gf5ro_20260620"
+  },
+  "completed": true,
+  "activity": {
+    "type": "run",
+    "run_type": "easy",
+    "distance_km": 8.0,
+    "pace_per_km": "6:11",
+    "duration_minutes": 50,
+    "heart_rate_avg": 162,
+    "heart_rate_max": 174,
+    "elevation_m": 26,
+    "shoes": "Nike Vomero Plus",
+    "strava_activity_id": "18995313354"
+  },
+  "gym": {
+    "completed": true,
+    "type": "shoulders+abs",
+    "duration_minutes": 39,
+    "notes": "Ombros e abdominais"
+  },
+  "daily_comment": {
+    "summary": "Despite Saturday being a planned rest day ahead of Sunday's 19 km long run, Duarte completed both a gym session (Shoulders + Abs, 39 min) and an 8.0 km run at 6:11/km. The run HR averaged 162 bpm with a max of 174, indicating a moderate-to-hard effort rather than a true easy pace — this extra load the day before the long run is a recovery risk worth monitoring.",
+    "did_right": [
+      "Completed the Shoulders + Abs gym session (39 min) that was planned for the week, keeping the strength block on track",
+      "Logged a solid 8.0 km at 6:11/km, contributing to weekly volume — 2 PRs achieved on Strava segments (Cabedelo–Salgueiros, Subida reserva bacalhau)"
+    ],
+    "to_improve": [
+      "Saturday was scheduled as a rest/active-recovery day before Sunday's 19 km long run — adding gym + run here reduces glycogen and increases fatigue; honour rest days that precede key sessions",
+      "Average HR of 162 bpm at 6:11/km is well above Zone 2 (target ≤ ~148 bpm for easy runs); slow down to 6:30–7:00/km on easy days to keep the aerobic stimulus without accumulating unnecessary stress"
+    ],
+    "generated_at": "2026-06-20T12:30:00Z"
+  }
+}
