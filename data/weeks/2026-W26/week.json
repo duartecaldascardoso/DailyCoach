@@ -1,0 +1,55 @@
+{
+  "week_id": "2026-W26",
+  "start_date": "2026-06-22",
+  "end_date": "2026-06-28",
+  "plan": {
+    "summary": "Consolidation week after the 44.3 km peak in W25. Target 35-38 km with one quality tempo session, a step-back long run of 18 km, and three gym sessions to make up for the strength deficit. Monday run+gym re-establishes the early-week habit that was missed in W25.",
+    "sessions": [
+      {
+        "day": "monday",
+        "type": "run+gym",
+        "description": "Easy run Zone 2 — 6 km at 6:30-7:00/km + Gym (Legs)",
+        "calendar_event_id": "jjshfek4hjbj3f1vjvrdptj94k"
+      },
+      {
+        "day": "tuesday",
+        "type": "gym",
+        "description": "Gym (Chest + Triceps)",
+        "calendar_event_id": "8cm204tksj5g3hfsp5v4t7io30"
+      },
+      {
+        "day": "wednesday",
+        "type": "run",
+        "description": "Tempo run — 2 km warm-up + 3 km at threshold pace (5:00-5:15/km) + 1 km cool-down",
+        "calendar_event_id": "c5pj01o86mlcoq6t0vthq7fo60"
+      },
+      {
+        "day": "thursday",
+        "type": "run",
+        "description": "Easy run Zone 2 — 7 km at 6:30-7:00/km",
+        "calendar_event_id": "p0rbsqqth8rjp29gvmrou38d24"
+      },
+      {
+        "day": "friday",
+        "type": "gym",
+        "description": "Gym (Back + Biceps)",
+        "calendar_event_id": "lgauunng96l2divvd63iam3tfg"
+      },
+      {
+        "day": "saturday",
+        "type": "rest",
+        "description": "Rest day — active recovery before long run",
+        "calendar_event_id": "c95r6eaqhomejfn5u5ht1kukh0"
+      },
+      {
+        "day": "sunday",
+        "type": "run",
+        "description": "Long run — 18 km at easy pace (6:20-6:50/km) — consolidation step-back after last week's 21.1 km",
+        "calendar_event_id": "8s5tsjc1nujglhphc6qno7fni0"
+      }
+    ]
+  },
+  "review": null,
+  "created_at": "2026-06-21T12:00:00Z",
+  "reviewed_at": null
+}

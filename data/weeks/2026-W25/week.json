@@ -14,7 +14,25 @@
       { "day": "sunday", "type": "run", "description": "Long run — 19 km at easy pace (6:30-7:00/km)" }
     ]
   },
-  "review": null,
+  "review": {
+    "summary": "Exceptional volume week with 44.3 km across 5 runs, headlined by an unplanned half-marathon (21.1 km, 6:01/km) on Sunday — Duarte's first HM-distance training run, 2.1 km beyond the 19 km target. The week shifted right with Monday entirely missed, but running output from Tuesday onward was outstanding. Gym work was severely under-delivered (1 of 3 planned sessions), and the 38% volume jump from W24 (32 km → 44.3 km) means W26 must be a consolidation week. HM Porto is now 12 weeks out.",
+    "completion_rate": 0.50,
+    "total_km": 44.3,
+    "total_runs": 5,
+    "total_gym_sessions": 1,
+    "total_time_minutes": 275,
+    "avg_pace": "6:12",
+    "highlights": [
+      "First half-marathon training distance: 21.1 km at 6:01/km on Sunday — new long run peak, 25 segment PRs",
+      "5 run days vs 3 planned — exceptional aerobic consistency across Tue–Sun",
+      "'Que tosta' quality session Thursday with 9 segment PRs shows solid speed development"
+    ],
+    "areas_to_improve": [
+      "Only 1 of 3 planned gym sessions completed — strength work is lagging and must be reprioritised in W26",
+      "Monday was entirely missed — week started a day late; better early-week execution needed",
+      "Volume jumped 38% vs W24 — consolidate at 35-38 km in W26 before building further"
+    ]
+  },
   "created_at": "2026-06-15T18:00:00Z",
-  "reviewed_at": null
+  "reviewed_at": "2026-06-21T12:00:00Z"
 }
