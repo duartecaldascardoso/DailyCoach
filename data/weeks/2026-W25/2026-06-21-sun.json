@@ -1,0 +1,37 @@
+{
+  "date": "2026-06-21",
+  "day_of_week": "sunday",
+  "week_id": "2026-W25",
+  "planned": {
+    "type": "run",
+    "description": "Long run — 19 km at easy pace (6:30-7:00/km)",
+    "calendar_event_id": "9jcpq5vrs6uk05jqd9bs9go594_20260621"
+  },
+  "completed": true,
+  "activity": {
+    "type": "run",
+    "run_type": "long",
+    "distance_km": 21.1,
+    "pace_per_km": "6:01",
+    "duration_minutes": 127,
+    "heart_rate_avg": 168,
+    "heart_rate_max": 187,
+    "elevation_m": 80,
+    "shoes": "Nike Vomero Plus",
+    "strava_activity_id": "19009335944"
+  },
+  "gym": null,
+  "daily_comment": {
+    "summary": "Went out for a planned 19 km easy long run and ended up running an improvised half marathon — 21.1 km at 6:01/km. That's 2.1 km over target and ~30 sec/km faster than the planned 6:30-7:00/km range, with avg HR of 168 bpm (Zone 4 territory) instead of the intended Zone 2. The run produced 25 Strava PRs and a half-marathon best effort of 2:07:53 — an excellent fitness marker 12 weeks out from Porto.",
+    "did_right": [
+      "Exceeded the distance target: 21.1 km vs planned 19 km, completing a full half marathon — the longest effort of the training block so far",
+      "25 segment PRs and a half-marathon time of 2:07:53 demonstrate real fitness gains and readiness to race in September",
+      "Consistent single-effort pacing throughout 21 km — the lap data shows no blowup in the second half"
+    ],
+    "to_improve": [
+      "Pace was 6:01/km vs target 6:30-7:00/km — avg HR of 168 bpm confirms this was a Zone 4 effort, not Zone 2. On future long runs keep HR below ~145 bpm even if it means slowing to 6:45+/km; aerobic base adaptation happens at lower intensities",
+      "With a VO2max interval session planned for this Wednesday, running this hard on Sunday compresses recovery time — monitor fatigue on Monday-Tuesday and consider making those days fully passive rest if legs feel heavy"
+    ],
+    "generated_at": "2026-06-21T17:10:00Z"
+  }
+}
