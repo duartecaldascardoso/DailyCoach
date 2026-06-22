@@ -1,0 +1,29 @@
+{
+  "date": "2026-06-22",
+  "day_of_week": "monday",
+  "week_id": "2026-W26",
+  "planned": {
+    "type": "run+gym",
+    "description": "Easy run Zone 2 — 6 km at 6:30-7:00/km + Gym (Legs)",
+    "calendar_event_id": "jjshfek4hjbj3f1vjvrdptj94k"
+  },
+  "completed": false,
+  "activity": null,
+  "gym": {
+    "completed": false,
+    "type": "legs",
+    "duration_minutes": null,
+    "notes": "Not completed. No Strava activity recorded."
+  },
+  "daily_comment": {
+    "summary": "Neither the planned 6 km easy Zone 2 run nor the Legs gym session were completed today — no Strava activity was recorded. This is the opening day of Week 26, 12 weeks out from the Porto Half Marathon (13 Sept), so consistent weekly loading is increasingly important. One missed Monday is manageable but the run+gym pairing should be prioritised from Tuesday onward to avoid compressing the week.",
+    "did_right": [
+      "Rest ahead of a structured week is not harmful if the body needed recovery from last week's VO2max and long-run load — an unlogged rest can be appropriate"
+    ],
+    "to_improve": [
+      "The 6 km Zone 2 run (6:30-7:00/km target) was not completed — consider folding it into Tuesday's planned gym day or shifting it to Thursday to keep weekly running volume on track",
+      "Legs strength session was missed — lower-body strength directly supports running economy and injury prevention at this base-building stage; reschedule within the week if possible"
+    ],
+    "generated_at": "2026-06-22T18:00:00Z"
+  }
+}

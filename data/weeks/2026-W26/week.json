@@ -1,0 +1,20 @@
+{
+  "week_id": "2026-W26",
+  "start_date": "2026-06-22",
+  "end_date": "2026-06-28",
+  "plan": {
+    "summary": "Progressive base-building week. Easy Zone 2 runs Monday and Thursday with gym pairings, VO2max interval session Wednesday, strength days Tuesday and Friday, full rest Saturday, and long run Sunday targeting 20 km.",
+    "sessions": [
+      { "day": "monday", "type": "run+gym", "description": "Easy run Zone 2 — 6 km at 6:30-7:00/km + Gym (Legs)" },
+      { "day": "tuesday", "type": "gym", "description": "Gym (Chest + Triceps)" },
+      { "day": "wednesday", "type": "run", "description": "VO2max intervals — 4×4 min at max effort with 3 min walking recovery" },
+      { "day": "thursday", "type": "run+gym", "description": "Easy run Zone 2 — 6 km + Gym (Back + Biceps)" },
+      { "day": "friday", "type": "gym", "description": "Gym (Shoulders + Abs)" },
+      { "day": "saturday", "type": "rest", "description": "Rest day — active recovery" },
+      { "day": "sunday", "type": "run", "description": "Long run — 20 km at easy pace (6:30-7:00/km)" }
+    ]
+  },
+  "review": null,
+  "created_at": "2026-06-22T18:00:00Z",
+  "reviewed_at": null
+}
